@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Channels;
 
 namespace CA
@@ -8,27 +9,19 @@ namespace CA
         public string Name { get; set; }
         public string Manufacturer { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public Language[] Languages { get; set; }
+        public List<Language> Languages { get; set; }
         public int SupportedLanguages { get; set; }
-        public Nullable<double> Price { get; set; }
+        public double? Price { get; set; }
 
-        public IDE(string name, string manufacturer, DateTime releaseDate, Language[] languages, int supportedLanguages, double? price)
+        public IDE(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price)
         {
             Name = name;
             Manufacturer = manufacturer;
             ReleaseDate = releaseDate;
-            Languages = languages;
             SupportedLanguages = supportedLanguages;
             Price = price;
         }
         
-        
-
-        private string FormattedRelease()
-        {
-            return $"{ReleaseDate:dd/MM/yyyy}";
-        }
-
         public void PrintLanguages()
         {
             Console.WriteLine("Supported languages for " + Name + ":");
@@ -40,7 +33,9 @@ namespace CA
 
         public override string ToString()
         {
-            return Name + " created by" + Manufacturer + " (released " + FormattedRelease() + ") for "+ SupportedLanguages  +" languages price: " + Price;
+            return
+                $"{Name} created by {Manufacturer} (released {ReleaseDate:dd/MM/yyyy}) for {SupportedLanguages} language(s) price: {Price,2}";
+            // return Name + " created by" + Manufacturer + " (released " + FormattedRelease() + ") for "+ SupportedLanguages  +" languages price: " + Price;
         }
     }
 }
