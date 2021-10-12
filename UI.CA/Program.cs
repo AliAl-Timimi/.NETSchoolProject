@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using static CA.LanguageType;
+using Project.BL.Domain;
+using static Project.BL.Domain.LanguageType;
 
 
-namespace CA
+namespace Project.UI.CA
 {
     class Program
     {

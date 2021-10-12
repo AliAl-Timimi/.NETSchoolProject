@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CA
+namespace Project.BL.Domain
 {
     public class Language
     {

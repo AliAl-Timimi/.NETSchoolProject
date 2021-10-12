@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Channels;
 
-namespace CA
+namespace Project.BL.Domain
 {
     public class IDE
     {

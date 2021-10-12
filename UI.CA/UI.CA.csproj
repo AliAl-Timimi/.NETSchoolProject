@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+      <ProjectReference Include="..\BL\BL.csproj" />
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net5.0</TargetFramework>
+        <StartupObject>Project.UI.CA.Program</StartupObject>
+        <AssemblyName>Project.UI.CA</AssemblyName>
+        <RootNamespace>Project.UI.CA</RootNamespace>
+    </PropertyGroup>
+</Project>
