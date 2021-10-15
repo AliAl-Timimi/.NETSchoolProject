@@ -152,8 +152,10 @@ namespace Project.UI.CA
             {
                 Console.WriteLine("Add Language");
                 Console.WriteLine("=======");
+                
                 Console.Write("Name: ");
                 string name = Console.ReadLine();
+                
                 printEnum();
                 int.TryParse(Console.ReadLine(), out int typeInt);
                 if (typeInt > Enum.GetValues(typeof(LanguageType)).Length)
@@ -161,19 +163,20 @@ namespace Project.UI.CA
                     typeInt = -1;
                 }
                 LanguageType type = (LanguageType) typeInt - 1;
+                
                 Console.Write("Release date (yyyy/mm/dd): ");
                 DateTime.TryParse(Console.ReadLine(), out DateTime release);
+                
                 Console.Write("Version: ");
                 double.TryParse(Console.ReadLine(), out double version);
+                
                 try
                 {
                     manager.AddLanguage(name, type, release, version);
                 }
                 catch (ValidationException e)
                 {
-                    Console.Write("Error: ");
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine();
+                    Console.WriteLine("Error: "+e.Message + "\nPlease try again...\n");
                     AddLanguage();
                 }
             }
@@ -182,12 +185,16 @@ namespace Project.UI.CA
             {
                 Console.WriteLine("Add IDE");
                 Console.WriteLine("=======");
+                
                 Console.Write("Name: ");
                 string name = Console.ReadLine();
+                
                 Console.Write("Manufacturer: ");
                 string manufacturer = Console.ReadLine();
+                
                 Console.Write("Release date (yyyy/mm/dd): ");
                 DateTime.TryParse(Console.ReadLine(), out DateTime release);
+                
                 Console.Write("Amount of supported languages: ");
                 string amountSup = Console.ReadLine();
                 int supportedLanguages;
@@ -195,17 +202,17 @@ namespace Project.UI.CA
                     int.TryParse(amountSup, out supportedLanguages);
                 else
                     supportedLanguages = -1;
+                
                 Console.Write("Price: ");
                 double.TryParse(Console.ReadLine(), out double price);
+                
                 try
                 {
                     manager.AddIde(name, manufacturer, release, supportedLanguages, price);
                 }
                 catch (ValidationException e)
                 {
-                    Console.Write("Error: ");
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine();
+                    Console.WriteLine("Error: " + e.Message + "\nPlease try again...\n");
                     AddIde();
                 }
             }
