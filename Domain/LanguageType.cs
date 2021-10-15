@@ -2,7 +2,7 @@ namespace Project.BL.Domain
 {
     public enum LanguageType
     {
-        Ppl, // Procedural Programming Language
+        Ppl = 0, // Procedural Programming Language
         Fpl, // Functional Programming Language
         Spl, // Scripting Programming Language
         Lpl, // Logic Programming Language

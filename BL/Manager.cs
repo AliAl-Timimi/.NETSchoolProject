@@ -25,24 +25,24 @@ namespace Project.BL
             return _repository.ReadLanguage(id);
         }
 
-        public ICollection<IDE> GetAllIdes()
+        public IEnumerable<IDE> GetAllIdes()
         {
             return _repository.ReadAllIdes();
         }
 
-        public ICollection<Language> GetAllLanguages()
+        public IEnumerable<Language> GetAllLanguages()
         {
             return _repository.ReadAllLanguages();
         }
 
-        public ICollection<Language> GetLanguageByGenre(string type)
+        public IEnumerable<Language> GetLanguageByGenre(string type)
         {
             return _repository.ReadLanguageByGenre(type);
         }
 
-        public ICollection<IDE> GetIdeByNameAndReleaseYear(string name, int releaseDate)
+        public IEnumerable<IDE> GetIdeByNameAndReleaseYear(string name, int releaseDate)
         {
-            return _repository.ReadIdeByNameAndReleaseYear(name, releaseDate);
+            return  _repository.ReadIdeByNameAndReleaseYear(name, releaseDate);
         }
 
         public void AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages,

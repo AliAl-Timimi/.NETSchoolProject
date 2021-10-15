@@ -68,6 +68,7 @@ namespace Project.UI.CA
                 Console.WriteLine("5) Add a Language");
                 Console.WriteLine("6) Add an IDE");
             }
+
             void PrintLanguages()
             {
                 Console.WriteLine("All languages");
@@ -77,6 +78,7 @@ namespace Project.UI.CA
                     Console.WriteLine(language);
                 }
             }
+
             void PrintIdes()
             {
                 Console.WriteLine("All IDEs");
@@ -86,6 +88,7 @@ namespace Project.UI.CA
                     Console.WriteLine(ide);
                 }
             }
+
             void LanguageByGenre()
             {
                 do
@@ -112,8 +115,10 @@ namespace Project.UI.CA
                     if (i != Enum.GetValues(typeof(LanguageType)).Length - 1)
                         Console.Write(", ");
                 }
+
                 Console.Write("): ");
             }
+
             void IdeByNameAndYear()
             {
                 Console.Write("Enter (part of) a name or leave blank: ");
@@ -142,6 +147,7 @@ namespace Project.UI.CA
                     Console.WriteLine(ide);
                 }
             }
+
             void AddLanguage()
             {
                 Console.WriteLine("Add Language");
@@ -150,7 +156,11 @@ namespace Project.UI.CA
                 string name = Console.ReadLine();
                 printEnum();
                 int.TryParse(Console.ReadLine(), out int typeInt);
-                LanguageType type = (LanguageType) typeInt-1;
+                if (typeInt > Enum.GetValues(typeof(LanguageType)).Length)
+                {
+                    typeInt = -1;
+                }
+                LanguageType type = (LanguageType) typeInt - 1;
                 Console.Write("Release date (yyyy/mm/dd): ");
                 DateTime.TryParse(Console.ReadLine(), out DateTime release);
                 Console.Write("Version: ");
@@ -161,11 +171,13 @@ namespace Project.UI.CA
                 }
                 catch (ValidationException e)
                 {
+                    Console.Write("Error: ");
                     Console.WriteLine(e.Message);
                     Console.WriteLine();
                     AddLanguage();
                 }
             }
+
             void AddIde()
             {
                 Console.WriteLine("Add IDE");
@@ -177,7 +189,12 @@ namespace Project.UI.CA
                 Console.Write("Release date (yyyy/mm/dd): ");
                 DateTime.TryParse(Console.ReadLine(), out DateTime release);
                 Console.Write("Amount of supported languages: ");
-                int.TryParse(Console.ReadLine(), out int supportedLanguages);
+                string amountSup = Console.ReadLine();
+                int supportedLanguages;
+                if (!string.IsNullOrEmpty(amountSup))
+                    int.TryParse(amountSup, out supportedLanguages);
+                else
+                    supportedLanguages = -1;
                 Console.Write("Price: ");
                 double.TryParse(Console.ReadLine(), out double price);
                 try
@@ -186,6 +203,7 @@ namespace Project.UI.CA
                 }
                 catch (ValidationException e)
                 {
+                    Console.Write("Error: ");
                     Console.WriteLine(e.Message);
                     Console.WriteLine();
                     AddIde();

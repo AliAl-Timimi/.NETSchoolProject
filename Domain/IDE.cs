@@ -7,17 +7,22 @@ namespace Project.BL.Domain
     public class IDE : IValidatableObject
     {
         public long Id { get; set; }
-        [MinLength(3)]
-        [MaxLength(35)]
+        
+        [Required]
+        [MinLength(3, ErrorMessage = "Name can not be under 3 characters long.")]
+        [MaxLength(15, ErrorMessage = "Name can not be over 15 characters long.")]
         public string Name { get; set; }
+        
         [Required]
         public string Manufacturer { get; set; }
-        [Required]
         public DateTime ReleaseDate { get; }
         public ICollection<Language> Languages { get; set; }
-        [Range(0, 10)]
+        
+        [Required]
+        [Range(0, 10, ErrorMessage = "Supported Languages should be within range 0-10.")]
         public int SupportedLanguages { get; set; }
-        [Range(0,3000)]
+        
+        [Range(0,3000, ErrorMessage = "Price should be within range 0-3000")]
         public double? Price { get; set; }
 
         public IDE(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price)
@@ -32,7 +37,7 @@ namespace Project.BL.Domain
         public override string ToString()
         {
             return
-                $"{Name,-10} created by {Manufacturer,10} (released {ReleaseDate:dd/MM/yyyy}) for {SupportedLanguages,2} language(s) price: {(Price != null ? Price : 0.00)}";
+                $"{Name,-15} created by {Manufacturer,10} (released {ReleaseDate:dd/MM/yyyy}) for {SupportedLanguages,2} language(s) price: {(Price != null ? Price : 0.00)}";
             // return Name + " created by" + Manufacturer + " (released " + FormattedRelease() + ") for "+ SupportedLanguages  +" languages price: " + Price;
         }
 

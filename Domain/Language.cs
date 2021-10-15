@@ -7,14 +7,14 @@ namespace Project.BL.Domain
     public class Language
     {
         public long Id { get; set; }
-        
-        [StringLength(50,ErrorMessage = "Name can not be over 50 characters long.")] 
+        [Required]
+        [StringLength(15,ErrorMessage = "Name can not be over 15 characters long.")] 
         public string Name { get; set; }
         [Required]
+        [Range(0, Int32.MaxValue, ErrorMessage = "A valid option must be chosen from the menu.")]
         public LanguageType Type { get; set; }
-        [Required]
         public DateTime ReleaseDate { get;}
-        [Required]
+        [Range(0.00001, double.PositiveInfinity, ErrorMessage = "Version needs to be filled and above 0")]
         public double Version { get; set; }
         public ICollection<IDE>  Ides { get; set; }
 
@@ -28,7 +28,7 @@ namespace Project.BL.Domain
 
         public override string ToString()
         {
-            return $"{Type,4} {Name,-10} (released {ReleaseDate:dd/MM/yyyy}) current version: {Version,5}";
+            return $"{Type,4} {Name,-15} (released {ReleaseDate:dd/MM/yyyy}) current version: {Version,5}";
         }
     }
 }
