@@ -12,7 +12,7 @@ namespace Project.BL
         public ICollection<Language> GetAllLanguages();
         public ICollection<Language> GetLanguageByGenre(string type);
         public ICollection<IDE> GetIdeByNameAndReleaseYear(string name, int releaseDate);
-        public void AddIde(long id, string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price);
-        public void AddLanguage(long id, string name, LanguageType type, DateTime releaseDate, double version);
+        public void AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price);
+        public void AddLanguage(string name, LanguageType type, DateTime releaseDate, double version);
     }
 }

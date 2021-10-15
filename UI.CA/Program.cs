@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Threading.Channels;
 using Project.BL;
 using Project.BL.Domain;
 
@@ -12,12 +15,13 @@ namespace Project.UI.CA
             int input;
             int input2;
             bool cont;
+
             do
             {
                 PrintMenu();
                 do
                 {
-                    Console.Write("Choice (1-4): ");
+                    Console.Write("Choice (1-6): ");
                     cont = int.TryParse(Console.ReadLine(), out input) && input >= 0 && input < 7;
                     if (!cont)
                     {
@@ -42,10 +46,10 @@ namespace Project.UI.CA
                         IdeByNameAndYear();
                         break;
                     case 5:
-                        
+                        AddLanguage();
                         break;
                     case 6:
-                        
+                        AddIde();
                         break;
                 }
 
@@ -61,8 +65,9 @@ namespace Project.UI.CA
                 Console.WriteLine("2) Show languages by type");
                 Console.WriteLine("3) Show all IDEs");
                 Console.WriteLine("4) Show IDEs with name and/or year of release");
+                Console.WriteLine("5) Add a Language");
+                Console.WriteLine("6) Add an IDE");
             }
-            
             void PrintLanguages()
             {
                 Console.WriteLine("All languages");
@@ -72,7 +77,6 @@ namespace Project.UI.CA
                     Console.WriteLine(language);
                 }
             }
-
             void PrintIdes()
             {
                 Console.WriteLine("All IDEs");
@@ -82,28 +86,15 @@ namespace Project.UI.CA
                     Console.WriteLine(ide);
                 }
             }
-
             void LanguageByGenre()
             {
                 do
                 {
-                    Console.Write("Language type (");
-                    for (int i = 0; i < Enum.GetValues(typeof(LanguageType)).Length; i++)
-                    {
-                        Console.Write($"{i + 1}={Enum.GetName(typeof(LanguageType), i)}");
-                        if (i != Enum.GetValues(typeof(LanguageType)).Length - 1)
-                        {
-                            Console.Write(", ");
-                        }
-                    }
-
-                    Console.Write("): ");
+                    printEnum();
                     cont = int.TryParse(Console.ReadLine(), out input2) && input2 > 0 &&
                            input2 <= Enum.GetValues(typeof(LanguageType)).Length;
                     if (!cont)
-                    {
                         Console.WriteLine("Ongeldige invoer!");
-                    }
                 } while (!cont);
 
                 foreach (Language lang in manager.GetLanguageByGenre(Enum.GetName(typeof(LanguageType), input2 - 1)))
@@ -112,6 +103,17 @@ namespace Project.UI.CA
                 }
             }
 
+            void printEnum()
+            {
+                Console.Write("Language type (");
+                for (int i = 0; i < Enum.GetValues(typeof(LanguageType)).Length; i++)
+                {
+                    Console.Write($"{i + 1}={Enum.GetName(typeof(LanguageType), i)}");
+                    if (i != Enum.GetValues(typeof(LanguageType)).Length - 1)
+                        Console.Write(", ");
+                }
+                Console.Write("): ");
+            }
             void IdeByNameAndYear()
             {
                 Console.Write("Enter (part of) a name or leave blank: ");
@@ -122,7 +124,7 @@ namespace Project.UI.CA
                 {
                     Console.Write("Enter a year or leave blank: ");
                     yearinput = Console.ReadLine();
-                    if (!String.IsNullOrEmpty(yearinput))
+                    if (!string.IsNullOrEmpty(yearinput))
                     {
                         cont = int.TryParse(yearinput, out year) && year <= DateTime.Now.Year;
                         if (!cont)
@@ -132,16 +134,62 @@ namespace Project.UI.CA
                         }
                     }
                     else
-                    {
                         cont = true;
-                    }
                 } while (!cont);
 
                 foreach (IDE ide in manager.GetIdeByNameAndReleaseYear(search, year))
                 {
                     Console.WriteLine(ide);
                 }
-                
+            }
+            void AddLanguage()
+            {
+                Console.WriteLine("Add Language");
+                Console.WriteLine("=======");
+                Console.Write("Name: ");
+                string name = Console.ReadLine();
+                printEnum();
+                int.TryParse(Console.ReadLine(), out int typeInt);
+                LanguageType type = (LanguageType) typeInt-1;
+                Console.Write("Release date (yyyy/mm/dd): ");
+                DateTime.TryParse(Console.ReadLine(), out DateTime release);
+                Console.Write("Version: ");
+                double.TryParse(Console.ReadLine(), out double version);
+                try
+                {
+                    manager.AddLanguage(name, type, release, version);
+                }
+                catch (ValidationException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine();
+                    AddLanguage();
+                }
+            }
+            void AddIde()
+            {
+                Console.WriteLine("Add IDE");
+                Console.WriteLine("=======");
+                Console.Write("Name: ");
+                string name = Console.ReadLine();
+                Console.Write("Manufacturer: ");
+                string manufacturer = Console.ReadLine();
+                Console.Write("Release date (yyyy/mm/dd): ");
+                DateTime.TryParse(Console.ReadLine(), out DateTime release);
+                Console.Write("Amount of supported languages: ");
+                int.TryParse(Console.ReadLine(), out int supportedLanguages);
+                Console.Write("Price: ");
+                double.TryParse(Console.ReadLine(), out double price);
+                try
+                {
+                    manager.AddIde(name, manufacturer, release, supportedLanguages, price);
+                }
+                catch (ValidationException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine();
+                    AddIde();
+                }
             }
         }
     }

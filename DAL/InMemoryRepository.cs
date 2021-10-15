@@ -25,7 +25,7 @@ namespace Project.DAL
             CreateLanguage(new Language("C", Ppl, new DateTime(1972, 1, 1), 17));
             CreateLanguage(new Language("JavaScript", Oopl, new DateTime(1995, 12, 4), 12.0));
 
-            CreateIde(new IDE("VSCode", "Microsoft", new DateTime(2015, 4, 29), 5, 0.00));
+            CreateIde(new IDE("VSCode", "Microsoft", new DateTime(2015, 4, 29), 5, null));
             CreateIde(new IDE("CLion", "JetBrains", new DateTime(2015, 4, 14), 1, 71.50));
             CreateIde(new IDE("IntelliJ", "JetBrains", new DateTime(2019, 12, 12), 2, 300.25));
             CreateIde(new IDE("PyCharm", "JetBrains", new DateTime(2010, 2, 3), 2, 119.99));

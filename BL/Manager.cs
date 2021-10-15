@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Project.BL.Domain;
 using Project.DAL;
 
@@ -44,14 +45,19 @@ namespace Project.BL
             return _repository.ReadIdeByNameAndReleaseYear(name, releaseDate);
         }
 
-        public void AddIde(long id, string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price)
+        public void AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages,
+            double? price)
         {
-            _repository.CreateIde(new IDE(name, manufacturer, releaseDate, supportedLanguages, price));
+            IDE ide = new IDE(name, manufacturer, releaseDate, supportedLanguages, price);
+            Validator.ValidateObject(ide, new ValidationContext(ide), true);
+            _repository.CreateIde(ide);
         }
 
-        public void AddLanguage(long id, string name, LanguageType type, DateTime releaseDate, double version)
+        public void AddLanguage(string name, LanguageType type, DateTime releaseDate, double version)
         {
-            _repository.CreateLanguage(new Language(name, type, releaseDate, version));
+            Language lang = new Language(name, type, releaseDate, version);
+            Validator.ValidateObject(lang, new ValidationContext(lang), true);
+            _repository.CreateLanguage(lang);
         }
     }
 }
