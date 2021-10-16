@@ -14,7 +14,9 @@ namespace Project.BL.Domain
         public string Name { get; set; }
         
         [Required]
+        [MinLength(3, ErrorMessage = "Manufacturer can not be under 3 characters long.")]
         public string Manufacturer { get; set; }
+        
         public DateTime ReleaseDate { get; }
         public ICollection<Language> Languages { get; set; }
         

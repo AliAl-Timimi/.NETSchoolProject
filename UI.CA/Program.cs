@@ -1,7 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Threading.Channels;
 using Project.BL;
 using Project.BL.Domain;
 
@@ -93,7 +91,7 @@ namespace Project.UI.CA
             {
                 do
                 {
-                    printEnum();
+                    PrintEnum();
                     cont = int.TryParse(Console.ReadLine(), out input2) && input2 > 0 &&
                            input2 <= Enum.GetValues(typeof(LanguageType)).Length;
                     if (!cont)
@@ -106,7 +104,7 @@ namespace Project.UI.CA
                 }
             }
 
-            void printEnum()
+            void PrintEnum()
             {
                 Console.Write("Language type (");
                 for (int i = 0; i < Enum.GetValues(typeof(LanguageType)).Length; i++)
@@ -134,8 +132,7 @@ namespace Project.UI.CA
                         cont = int.TryParse(yearinput, out year) && year <= DateTime.Now.Year;
                         if (!cont)
                         {
-                            Console.WriteLine(year);
-                            Console.WriteLine("Ongeldige invoer!");
+                            Console.WriteLine(year + "\nOngeldige invoer!");
                         }
                     }
                     else
@@ -156,7 +153,7 @@ namespace Project.UI.CA
                 Console.Write("Name: ");
                 string name = Console.ReadLine();
                 
-                printEnum();
+                PrintEnum();
                 int.TryParse(Console.ReadLine(), out int typeInt);
                 if (typeInt > Enum.GetValues(typeof(LanguageType)).Length)
                 {

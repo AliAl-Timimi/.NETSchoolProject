@@ -55,17 +55,17 @@ namespace Project.DAL
             return _languages.FirstOrDefault(language => language.Id == id);
         }
 
-        public ICollection<IDE> ReadAllIdes()
+        public IEnumerable<IDE> ReadAllIdes()
         {
             return _ides;
         }
 
-        public ICollection<Language> ReadAllLanguages()
+        public IEnumerable<Language> ReadAllLanguages()
         {
             return _languages;
         }
 
-        public ICollection<Language> ReadLanguageByGenre(string type)
+        public IEnumerable<Language> ReadLanguageByGenre(string type)
         {
             ICollection<Language> tempLanguages = new Collection<Language>();
             foreach (Language language in _languages)
@@ -79,7 +79,7 @@ namespace Project.DAL
             return tempLanguages;
         }
 
-        public ICollection<IDE> ReadIdeByNameAndReleaseYear(string name, int year)
+        public IEnumerable<IDE> ReadIdeByNameAndReleaseYear(string name, int year)
         {
             List<IDE> tempIdes = new List<IDE>();
 

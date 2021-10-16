@@ -8,10 +8,10 @@ namespace Project.DAL
     {
         public IDE ReadIde(long id);
         public Language ReadLanguage(long id);
-        public ICollection<IDE> ReadAllIdes();
-        public ICollection<Language> ReadAllLanguages();
-        public ICollection<Language> ReadLanguageByGenre(string languageType);
-        public ICollection<IDE> ReadIdeByNameAndReleaseYear(string name, int releaseYear);
+        public IEnumerable<IDE> ReadAllIdes();
+        public IEnumerable<Language> ReadAllLanguages();
+        public IEnumerable<Language> ReadLanguageByGenre(string languageType);
+        public IEnumerable<IDE> ReadIdeByNameAndReleaseYear(string name, int releaseYear);
         public void CreateIde(IDE ide);
         public void CreateLanguage(Language language);
     }

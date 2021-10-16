@@ -8,7 +8,7 @@ namespace Project.BL
 {
     public class Manager : IManager
     {
-        private IRepository _repository;
+        private readonly IRepository _repository;
 
         public Manager()
         {
