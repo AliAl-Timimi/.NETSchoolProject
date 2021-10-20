@@ -8,9 +8,7 @@ namespace Languages.UI.CA
     class Program
     {
         private IManager _manager = new Manager();
-        private int _input;
-        private int _input2;
-        private bool _cont;
+
         static void Main(string[] args)
         {
             Program program = new Program();
@@ -19,6 +17,8 @@ namespace Languages.UI.CA
 
         private void Run()
         {
+            int _input;
+            bool _cont;
             do
             {
                 PrintMenu();
@@ -95,11 +95,13 @@ namespace Languages.UI.CA
 
         private void LanguageByGenre()
         {
+            int _input2;
+            bool _cont;
             do
             {
                 PrintEnum();
                 _cont = int.TryParse(Console.ReadLine(), out _input2) && _input2 > 0 &&
-                       _input2 <= Enum.GetValues(typeof(LanguageType)).Length;
+                        _input2 <= Enum.GetValues(typeof(LanguageType)).Length;
                 if (!_cont)
                     Console.WriteLine("Ongeldige invoer!");
             } while (!_cont);
@@ -125,6 +127,7 @@ namespace Languages.UI.CA
 
         private void IdeByNameAndYear()
         {
+            bool _cont;
             Console.Write("Enter (part of) a name or leave blank: ");
             string search = Console.ReadLine();
             string yearinput;
