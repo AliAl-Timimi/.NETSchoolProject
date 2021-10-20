@@ -11,8 +11,8 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <AssemblyName>Project.BL</AssemblyName>
-        <RootNamespace>Project.BL</RootNamespace>
+        <AssemblyName>Languages.BL</AssemblyName>
+        <RootNamespace>Languages.BL</RootNamespace>
     </PropertyGroup>
 
 </Project>

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Project.BL.Domain;
+using Languages.BL.Domain;
 
-namespace Project.BL
+namespace Languages.BL
 {
     public interface IManager
     {

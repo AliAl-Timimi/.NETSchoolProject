@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <AssemblyName>Project.BL.Domain</AssemblyName>
-        <RootNamespace>Project.BL.Domain</RootNamespace>
+        <AssemblyName>Languages.BL.Domain</AssemblyName>
+        <RootNamespace>Languages.BL.Domain</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

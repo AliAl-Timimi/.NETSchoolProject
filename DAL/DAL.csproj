@@ -6,8 +6,8 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <AssemblyName>Project.DAL</AssemblyName>
-        <RootNamespace>Project.DAL</RootNamespace>
+        <AssemblyName>Languages.DAL</AssemblyName>
+        <RootNamespace>Languages.DAL</RootNamespace>
     </PropertyGroup>
 
 </Project>

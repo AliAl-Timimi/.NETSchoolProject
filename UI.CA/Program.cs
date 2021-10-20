@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Project.BL;
-using Project.BL.Domain;
+using Languages.BL;
+using Languages.BL.Domain;
 
-namespace Project.UI.CA
+namespace Languages.UI.CA
 {
     class Program
     {

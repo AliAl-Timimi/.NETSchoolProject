@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Project.BL.Domain
+namespace Languages.BL.Domain
 {
     public class IDE : IValidatableObject
     {

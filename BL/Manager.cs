@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Project.BL.Domain;
-using Project.DAL;
+using Languages.BL.Domain;
+using Languages.DAL;
 
-namespace Project.BL
+namespace Languages.BL
 {
     public class Manager : IManager
     {

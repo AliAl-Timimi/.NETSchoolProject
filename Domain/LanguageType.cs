@@ -1,4 +1,4 @@
-namespace Project.BL.Domain
+namespace Languages.BL.Domain
 {
     public enum LanguageType
     {

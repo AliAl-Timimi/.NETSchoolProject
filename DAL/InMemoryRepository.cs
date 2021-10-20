@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Project.BL.Domain;
-using static Project.BL.Domain.LanguageType;
+using Languages.BL.Domain;
+using static Languages.BL.Domain.LanguageType;
 
-namespace Project.DAL
+namespace Languages.DAL
 {
     public class InMemoryRepository : IRepository
     {
