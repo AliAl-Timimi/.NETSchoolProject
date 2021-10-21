@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Languages.BL;
 using Languages.BL.Domain;
+using Languages.DAL.EF;
 
 namespace Languages.UI.CA
 {
@@ -88,7 +89,7 @@ namespace Languages.UI.CA
         {
             Console.WriteLine("All IDEs");
             Console.WriteLine("========");
-            foreach (IDE ide in _manager.GetAllIdes())
+            foreach (Ide ide in _manager.GetAllIdes())
             {
                 Console.WriteLine(ide);
             }
@@ -149,7 +150,7 @@ namespace Languages.UI.CA
                     _cont = true;
             } while (!_cont);
 
-            foreach (IDE ide in _manager.GetIdeByNameAndReleaseYear(search, year))
+            foreach (Ide ide in _manager.GetIdeByNameAndReleaseYear(search, year))
             {
                 Console.WriteLine(ide);
             }

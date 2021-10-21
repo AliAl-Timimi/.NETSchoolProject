@@ -15,7 +15,7 @@ namespace Languages.BL
             _repository = new InMemoryRepository();
         }
 
-        public IDE GetIde(long id)
+        public Ide GetIde(long id)
         {
             return _repository.ReadIde(id);
         }
@@ -25,7 +25,7 @@ namespace Languages.BL
             return _repository.ReadLanguage(id);
         }
 
-        public IEnumerable<IDE> GetAllIdes()
+        public IEnumerable<Ide> GetAllIdes()
         {
             return _repository.ReadAllIdes();
         }
@@ -40,15 +40,15 @@ namespace Languages.BL
             return _repository.ReadLanguageByGenre(type);
         }
 
-        public IEnumerable<IDE> GetIdeByNameAndReleaseYear(string name, int releaseDate)
+        public IEnumerable<Ide> GetIdeByNameAndReleaseYear(string name, int releaseDate)
         {
             return  _repository.ReadIdeByNameAndReleaseYear(name, releaseDate);
         }
 
-        public IDE AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages,
+        public Ide AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages,
             double? price)
         {
-            IDE ide = new IDE(name, manufacturer, releaseDate, supportedLanguages, price);
+            Ide ide = new Ide(name, manufacturer, releaseDate, supportedLanguages, price);
             Validator.ValidateObject(ide, new ValidationContext(ide), true);
             _repository.CreateIde(ide);
             return ide;

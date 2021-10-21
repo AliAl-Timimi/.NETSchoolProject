@@ -23,17 +23,17 @@ namespace Languages.DAL.EF
             Language c = new Language("C", Ppl, new DateTime(1972, 1, 1), 17);
             Language js = new Language("JavaScript", Oopl, new DateTime(1995, 12, 4), 12.0);
 
-            IDE vscode = new IDE("VSCode", "Microsoft", new DateTime(2015, 4, 29), 5, null);
-            IDE clion = new IDE("CLion", "JetBrains", new DateTime(2015, 4, 14), 1, 71.50);
-            IDE intellij = new IDE("IntelliJ", "JetBrains", new DateTime(2019, 12, 12), 2, 300.25);
-            IDE pycharm = new IDE("PyCharm", "JetBrains", new DateTime(2010, 2, 3), 2, 119.99);
-            IDE rider= new IDE("Rider", "JetBrains", new DateTime(2017, 2, 4), 1, 83.59);
+            Ide vscode = new Ide("VSCode", "Microsoft", new DateTime(2015, 4, 29), 5, null);
+            Ide clion = new Ide("CLion", "JetBrains", new DateTime(2015, 4, 14), 1, 71.50);
+            Ide intellij = new Ide("IntelliJ", "JetBrains", new DateTime(2019, 12, 12), 2, 300.25);
+            Ide pycharm = new Ide("PyCharm", "JetBrains", new DateTime(2010, 2, 3), 2, 119.99);
+            Ide rider= new Ide("Rider", "JetBrains", new DateTime(2017, 2, 4), 1, 83.59);
 
-            java.Ides = new List<IDE> {vscode, intellij};
-            csharp.Ides = new List<IDE> {vscode, rider};
-            python.Ides = new List<IDE> {vscode, pycharm};
-            c.Ides = new List<IDE> {vscode, clion};
-            js.Ides = new List<IDE> {vscode, intellij, pycharm};
+            java.Ides = new List<Ide> {vscode, intellij};
+            csharp.Ides = new List<Ide> {vscode, rider};
+            python.Ides = new List<Ide> {vscode, pycharm};
+            c.Ides = new List<Ide> {vscode, clion};
+            js.Ides = new List<Ide> {vscode, intellij, pycharm};
 
             vscode.Languages = new List<Language> {java, csharp, python, c, js};
             clion.Languages = new List<Language> {c};
@@ -41,8 +41,22 @@ namespace Languages.DAL.EF
             pycharm.Languages = new List<Language> {python, js};
             rider.Languages = new List<Language> {csharp};
 
+
+            List<Language> languages = new() {java, csharp, python, c, js};
+            for (int i = 0; i < languages.Count; i++)
+            {
+                languages[i].Id = i + 1;
+            }
+            
+            List<Ide> ides = new() {vscode, clion, intellij, pycharm, rider};
+            for (int i = 0; i < ides.Count; i++)
+            {
+                ides[i].Id = i + 1;
+            }
+            
             context.Languages.AddRange(new List<Language> {java, csharp, python, c, js});
-            context.Ides.AddRange(new List<IDE> {vscode, clion, intellij, pycharm, rider});
+            context.Ides.AddRange(new List<Ide> {vscode, clion, intellij, pycharm, rider});
+
             context.SaveChanges();
             context.ChangeTracker.Clear();
         }

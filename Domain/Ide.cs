@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Languages.BL.Domain
 {
-    public class IDE : IValidatableObject
+    public class Ide : IValidatableObject
     {
         [Key]
         public long Id { get; set; }
@@ -18,7 +18,7 @@ namespace Languages.BL.Domain
         [MinLength(3, ErrorMessage = "Manufacturer can not be under 3 characters long.")]
         public string Manufacturer { get; set; }
         
-        public DateTime ReleaseDate { get; }
+        public DateTime ReleaseDate { get; set; }
         public ICollection<Language> Languages { get; set; }
         
         [Required]
@@ -28,7 +28,7 @@ namespace Languages.BL.Domain
         [Range(0,3000, ErrorMessage = "Price should be within range 0-3000")]
         public double? Price { get; set; }
 
-        public IDE(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price)
+        public Ide(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price)
         {
             Name = name;
             Manufacturer = manufacturer;
