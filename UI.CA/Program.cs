@@ -7,8 +7,9 @@ namespace Languages.UI.CA
 {
     class Program
     {
-        private IManager _manager = new Manager();
+        private readonly IManager _manager = new Manager();
 
+        
         static void Main(string[] args)
         {
             Program program = new Program();

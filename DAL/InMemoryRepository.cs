@@ -16,7 +16,7 @@ namespace Languages.DAL
         {
             Seed();
         }
-
+        
         private void Seed()
         {
             CreateLanguage(new Language("Java", Oopl, new DateTime(1996, 1, 23), 16.02));

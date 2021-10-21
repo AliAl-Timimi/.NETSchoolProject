@@ -6,6 +6,7 @@ namespace Languages.BL.Domain
 {
     public class IDE : IValidatableObject
     {
+        [Key]
         public long Id { get; set; }
         
         [Required]

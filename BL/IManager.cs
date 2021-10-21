@@ -12,7 +12,7 @@ namespace Languages.BL
         public IEnumerable<Language> GetAllLanguages();
         public IEnumerable<Language> GetLanguageByGenre(string type);
         public IEnumerable<IDE> GetIdeByNameAndReleaseYear(string name, int releaseDate);
-        public void AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price);
-        public void AddLanguage(string name, LanguageType type, DateTime releaseDate, double version);
+        public IDE AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price);
+        public Language AddLanguage(string name, LanguageType type, DateTime releaseDate, double version);
     }
 }

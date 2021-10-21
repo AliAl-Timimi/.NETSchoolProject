@@ -45,19 +45,21 @@ namespace Languages.BL
             return  _repository.ReadIdeByNameAndReleaseYear(name, releaseDate);
         }
 
-        public void AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages,
+        public IDE AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages,
             double? price)
         {
             IDE ide = new IDE(name, manufacturer, releaseDate, supportedLanguages, price);
             Validator.ValidateObject(ide, new ValidationContext(ide), true);
             _repository.CreateIde(ide);
+            return ide;
         }
 
-        public void AddLanguage(string name, LanguageType type, DateTime releaseDate, double version)
+        public Language AddLanguage(string name, LanguageType type, DateTime releaseDate, double version)
         {
             Language lang = new Language(name, type, releaseDate, version);
             Validator.ValidateObject(lang, new ValidationContext(lang), true);
             _repository.CreateLanguage(lang);
+            return lang;
         }
     }
 }

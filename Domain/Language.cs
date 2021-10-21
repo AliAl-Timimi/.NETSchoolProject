@@ -6,6 +6,7 @@ namespace Languages.BL.Domain
 {
     public class Language
     {
+        [Key]
         public long Id { get; set; }
         
         [Required]
