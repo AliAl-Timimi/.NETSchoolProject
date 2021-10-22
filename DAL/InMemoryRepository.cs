@@ -71,17 +71,15 @@ namespace Languages.DAL
             return _languages;
         }
 
-        public IEnumerable<Language> ReadLanguageByGenre(string type)
+        public IEnumerable<Language> ReadLanguageByGenre(int type)
         {
+            LanguageType languageType = (LanguageType)type;
             ICollection<Language> tempLanguages = new Collection<Language>();
             foreach (Language language in _languages)
             {
-                if (language.Type.ToString() == type)
-                {
+                if (language.Type.ToString() == languageType.ToString())
                     tempLanguages.Add(language);
-                }
             }
-
             return tempLanguages;
         }
 
@@ -97,7 +95,6 @@ namespace Languages.DAL
                     tempIdes.Add(ide);
                 }
             }
-
             return tempIdes;
         }
 

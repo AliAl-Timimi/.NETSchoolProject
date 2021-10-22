@@ -10,7 +10,7 @@ namespace Languages.DAL
         public Language ReadLanguage(long id);
         public IEnumerable<Ide> ReadAllIdes();
         public IEnumerable<Language> ReadAllLanguages();
-        public IEnumerable<Language> ReadLanguageByGenre(string languageType);
+        public IEnumerable<Language> ReadLanguageByGenre(int languageType);
         public IEnumerable<Ide> ReadIdeByNameAndReleaseYear(string name, int releaseYear);
         public void CreateIde(Ide ide);
         public void CreateLanguage(Language language);

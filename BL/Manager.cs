@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Languages.BL.Domain;
 using Languages.DAL;
+using Languages.DAL.EF;
 
 namespace Languages.BL
 {
@@ -12,7 +13,7 @@ namespace Languages.BL
 
         public Manager()
         {
-            _repository = new InMemoryRepository();
+            _repository = new Repository();
         }
 
         public Ide GetIde(long id)
@@ -35,7 +36,7 @@ namespace Languages.BL
             return _repository.ReadAllLanguages();
         }
 
-        public IEnumerable<Language> GetLanguageByGenre(string type)
+        public IEnumerable<Language> GetLanguageByGenre(int type)
         {
             return _repository.ReadLanguageByGenre(type);
         }

@@ -9,6 +9,7 @@ namespace Languages.DAL.EF
     {
         public DbSet<Language> Languages { get; set; }
         public DbSet<Ide> Ides { get; set; }
+        public DbSet<Software> Softwares { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

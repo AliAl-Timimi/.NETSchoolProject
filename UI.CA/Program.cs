@@ -94,7 +94,7 @@ namespace Languages.UI.CA
                 if (!cont) Console.WriteLine("Ongeldige invoer!");
             } while (!cont);
 
-            foreach (Language lang in _manager.GetLanguageByGenre(Enum.GetName(typeof(LanguageType), input2 - 1)))
+            foreach (Language lang in _manager.GetLanguageByGenre(input2 - 1))
             {
                 Console.WriteLine(lang);
             }
