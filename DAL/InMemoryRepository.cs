@@ -9,8 +9,8 @@ namespace Languages.DAL
 {
     public class InMemoryRepository : IRepository
     {
-        private List<Language> _languages = new();
-        private List<Ide> _ides = new();
+        private ICollection<Language> _languages = new List<Language>();
+        private ICollection<Ide> _ides = new List<Ide>();
 
         public InMemoryRepository()
         {
@@ -19,30 +19,36 @@ namespace Languages.DAL
         
         private void Seed()
         {
-            CreateLanguage(new Language("Java", Oopl, new DateTime(1996, 1, 23), 16.02));
-            CreateLanguage(new Language("C#", Oopl, new DateTime(2002, 1, 1), 9.0));
-            CreateLanguage(new Language("Python", Fpl, new DateTime(1991, 2, 20), 3.76));
-            CreateLanguage(new Language("C", Ppl, new DateTime(1972, 1, 1), 17));
-            CreateLanguage(new Language("JavaScript", Oopl, new DateTime(1995, 12, 4), 12.0));
+            Language java = new Language("Java", Oopl, new DateTime(1996, 1, 23), 16.02);
+            Language csharp = new Language("C#", Oopl, new DateTime(2002, 1, 1), 9.0);
+            Language python = new Language("Python", Fpl, new DateTime(1991, 2, 20), 3.76);
+            Language c = new Language("C", Ppl, new DateTime(1972, 1, 1), 17);
+            Language js = new Language("JavaScript", Oopl, new DateTime(1995, 12, 4), 12.0);
 
-            CreateIde(new Ide("VSCode", "Microsoft", new DateTime(2015, 4, 29), 5, null));
-            CreateIde(new Ide("CLion", "JetBrains", new DateTime(2015, 4, 14), 1, 71.50));
-            CreateIde(new Ide("IntelliJ", "JetBrains", new DateTime(2019, 12, 12), 2, 300.25));
-            CreateIde(new Ide("PyCharm", "JetBrains", new DateTime(2010, 2, 3), 2, 119.99));
-            CreateIde(new Ide("Rider", "JetBrains", new DateTime(2017, 2, 4), 1, 83.59));
+            Ide vscode = new Ide("VSCode", "Microsoft", new DateTime(2015, 4, 29), 5, null);
+            Ide clion = new Ide("CLion", "JetBrains", new DateTime(2015, 4, 14), 1, 71.50);
+            Ide intellij = new Ide("IntelliJ", "JetBrains", new DateTime(2019, 12, 12), 2, 300.25);
+            Ide pycharm = new Ide("PyCharm", "JetBrains", new DateTime(2010, 2, 3), 2, 119.99);
+            Ide rider= new Ide("Rider", "JetBrains", new DateTime(2017, 2, 4), 1, 83.59);
 
-            _languages[0].Ides = new List<Ide> {_ides[0], _ides[2]};
-            _languages[1].Ides = new List<Ide> {_ides[0], _ides[4]};
-            _languages[2].Ides = new List<Ide> {_ides[0], _ides[3]};
-            _languages[3].Ides = new List<Ide> {_ides[0], _ides[1]};
-            _languages[4].Ides = new List<Ide> {_ides[0], _ides[2], _ides[3]};
+            java.Ides = new List<Ide> {vscode, intellij};
+            csharp.Ides = new List<Ide> {vscode, rider};
+            python.Ides = new List<Ide> {vscode, pycharm};
+            c.Ides = new List<Ide> {vscode, clion};
+            js.Ides = new List<Ide> {vscode, intellij, pycharm};
 
-            _ides[0].Languages = new List<Language>
-                {_languages[0], _languages[1], _languages[2], _languages[3], _languages[4]};
-            _ides[1].Languages = new List<Language> {_languages[3]};
-            _ides[2].Languages = new List<Language> {_languages[0], _languages[4]};
-            _ides[3].Languages = new List<Language> {_languages[2], _languages[4]};
-            _ides[4].Languages = new List<Language> {_languages[1]};
+            vscode.Languages = new List<Language> {java, csharp, python, c, js};
+            clion.Languages = new List<Language> {c};
+            intellij.Languages = new List<Language> {java, js};
+            pycharm.Languages = new List<Language> {python, js};
+            rider.Languages = new List<Language> {csharp};
+
+
+            IEnumerable<Language> languages = new List<Language> {java, csharp, python, c, js};
+            foreach (Language language in languages) CreateLanguage(language);
+            
+            IEnumerable<Ide> ides = new List<Ide> {vscode, clion, intellij, pycharm, rider};
+            foreach (Ide ide in ides) CreateIde(ide);
         }
 
         public Ide ReadIde(long id)
