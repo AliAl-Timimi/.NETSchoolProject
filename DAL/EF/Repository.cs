@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Languages.BL.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace Languages.DAL.EF
 {

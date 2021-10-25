@@ -76,10 +76,7 @@ namespace Languages.DAL
             LanguageType languageType = (LanguageType)type;
             ICollection<Language> tempLanguages = new Collection<Language>();
             foreach (Language language in _languages)
-            {
-                if (language.Type.ToString() == languageType.ToString())
-                    tempLanguages.Add(language);
-            }
+                if (language.Type.ToString() == languageType.ToString()) tempLanguages.Add(language);
             return tempLanguages;
         }
 

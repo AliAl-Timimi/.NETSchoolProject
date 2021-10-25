@@ -8,7 +8,7 @@ namespace Languages.UI.CA
     class Program
     {
         private readonly IManager _manager = new Manager();
-        
+
         static void Main(string[] args)
         {
             Program program = new Program();
@@ -95,9 +95,7 @@ namespace Languages.UI.CA
             } while (!cont);
 
             foreach (Language lang in _manager.GetLanguageByGenre(input2 - 1))
-            {
                 Console.WriteLine(lang);
-            }
         }
 
         private void PrintEnum()
@@ -106,10 +104,8 @@ namespace Languages.UI.CA
             for (int i = 0; i < Enum.GetValues(typeof(LanguageType)).Length; i++)
             {
                 Console.Write($"{i + 1}={Enum.GetName(typeof(LanguageType), i)}");
-                if (i != Enum.GetValues(typeof(LanguageType)).Length - 1)
-                    Console.Write(", ");
+                if (i != Enum.GetValues(typeof(LanguageType)).Length - 1) Console.Write(", ");
             }
-
             Console.Write("): ");
         }
 
@@ -131,8 +127,7 @@ namespace Languages.UI.CA
                 else cont = true;
             } while (!cont);
 
-            foreach (Ide ide in _manager.GetIdeByNameAndReleaseYear(search, year))
-                Console.WriteLine(ide);
+            foreach (Ide ide in _manager.GetIdeByNameAndReleaseYear(search, year)) Console.WriteLine(ide);
         }
 
         private void AddLanguage()
@@ -148,8 +143,7 @@ namespace Languages.UI.CA
 
                 PrintEnum();
                 int.TryParse(Console.ReadLine(), out int typeInt);
-                if (typeInt > Enum.GetValues(typeof(LanguageType)).Length)
-                    typeInt = -1;
+                if (typeInt > Enum.GetValues(typeof(LanguageType)).Length) typeInt = -1;
 
                 LanguageType type = (LanguageType) typeInt - 1;
 
@@ -167,7 +161,6 @@ namespace Languages.UI.CA
                 catch (ValidationException e)
                 {
                     Console.WriteLine("Error: " + e.Message + "\nPlease try again...\n");
-                    AddLanguage();
                 }
             }
         }
@@ -194,8 +187,7 @@ namespace Languages.UI.CA
                 int supportedLanguages;
                 if (!string.IsNullOrEmpty(amountSup))
                     int.TryParse(amountSup, out supportedLanguages);
-                else
-                    supportedLanguages = -1;
+                else supportedLanguages = -1;
 
                 Console.Write("Price: ");
                 double.TryParse(Console.ReadLine(), out double price);

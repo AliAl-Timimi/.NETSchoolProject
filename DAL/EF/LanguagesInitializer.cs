@@ -45,10 +45,8 @@ namespace Languages.DAL.EF
             List<Language> languages = new() {java, csharp, python, c, js};
             for (int i = 0; i < languages.Count; i++) languages[i].Id = i + 1;
             
-            
             List<Ide> ides = new() {vscode, clion, intellij, pycharm, rider};
             for (int i = 0; i < ides.Count; i++) ides[i].Id = i + 1;
-            
             
             context.Languages.AddRange(new List<Language> {java, csharp, python, c, js});
             context.Ides.AddRange(new List<Ide> {vscode, clion, intellij, pycharm, rider});
