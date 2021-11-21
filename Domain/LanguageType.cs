@@ -1,6 +1,6 @@
 namespace Languages.BL.Domain
 {
-    public enum LanguageType
+    public enum LanguageType : byte
     {
         Ppl = 0, // Procedural Programming Language
         Fpl, // Functional Programming Language

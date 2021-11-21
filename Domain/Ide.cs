@@ -6,26 +6,25 @@ namespace Languages.BL.Domain
 {
     public class Ide : IValidatableObject
     {
-        [Key]
-        public long Id { get; set; }
-        
+        [Key] public long Id { get; set; }
+
         [Required]
         [MinLength(3, ErrorMessage = "Name can not be under 3 characters long.")]
         [MaxLength(15, ErrorMessage = "Name can not be over 15 characters long.")]
         public string Name { get; set; }
-        
+
         [Required]
         [MinLength(3, ErrorMessage = "Manufacturer can not be under 3 characters long.")]
         public string Manufacturer { get; set; }
-        
+
         public DateTime ReleaseDate { get; set; }
         public ICollection<Language> Languages { get; set; }
-        
+
         [Required]
         [Range(0, 10, ErrorMessage = "Supported Languages should be within range 0-10.")]
         public int SupportedLanguages { get; set; }
-        
-        [Range(0,3000, ErrorMessage = "Price should be within range 0-3000")]
+
+        [Range(0, 3000, ErrorMessage = "Price should be within range 0-3000")]
         public double? Price { get; set; }
 
         public Ide(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price)
@@ -60,6 +59,7 @@ namespace Languages.BL.Domain
                 errors.Add(new ValidationResult(errorMessage,
                     new[] {"ReleaseDate"}));
             }
+
             return errors;
         }
     }

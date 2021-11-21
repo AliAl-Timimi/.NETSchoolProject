@@ -7,9 +7,10 @@ namespace Languages.DAL.EF
     public class Repository : IRepository
     {
         private readonly LanguagesDbContext _context;
-        public Repository()
+
+        public Repository(LanguagesDbContext context)
         {
-            _context = new LanguagesDbContext();
+            _context = context;
         }
 
         public Ide ReadIde(long id)
@@ -32,10 +33,10 @@ namespace Languages.DAL.EF
             return _context.Languages.AsEnumerable();
         }
 
-        public IEnumerable<Language> ReadLanguageByGenre(int languageType)
+        public IEnumerable<Language> ReadLanguageByGenre(LanguageType languageType)
         {
             return _context.Languages
-                .Where(lang => lang.Type == (LanguageType) languageType)
+                .Where(lang => lang.Type == languageType)
                 .AsEnumerable();
         }
 
@@ -43,26 +44,26 @@ namespace Languages.DAL.EF
         {
             IQueryable<Ide> idesQueryable = _context.Ides;
             if (!string.IsNullOrEmpty(name))
-                idesQueryable = idesQueryable.Where(ide => ide.Name.Contains(name));
+                idesQueryable = idesQueryable.Where(ide => ide.Name.ToLower().Contains(name.ToLower()));
             if (releaseYear != 0)
                 idesQueryable = idesQueryable.Where(ide => ide.ReleaseDate.Year == releaseYear);
             return idesQueryable.AsEnumerable();
         }
 
-        public void CreateIde(Ide ide)
+        public bool CreateIde(Ide ide)
         {
-            ide.Id = _context.Ides.Count() +1;
             _context.Ides.Add(ide);
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
+            return true;
         }
 
-        public void CreateLanguage(Language language)
+        public bool CreateLanguage(Language language)
         {
-            language.Id = _context.Languages.Count() +1;
             _context.Languages.Add(language);
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
+            return true;
         }
     }
 }

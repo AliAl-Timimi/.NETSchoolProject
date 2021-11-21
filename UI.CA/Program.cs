@@ -2,16 +2,27 @@
 using System.ComponentModel.DataAnnotations;
 using Languages.BL;
 using Languages.BL.Domain;
+using Languages.DAL;
+using Languages.DAL.EF;
 
 namespace Languages.UI.CA
 {
     class Program
     {
-        private readonly IManager _manager = new Manager();
+        private readonly IManager _manager;
+
+        public Program(IManager manager)
+        {
+            _manager = manager;
+        }
 
         static void Main(string[] args)
         {
-            Program program = new Program();
+            LanguagesDbContext context = new LanguagesDbContext();
+            IRepository repository = new Repository(context);
+            IManager manager = new Manager(repository);
+
+            Program program = new Program(manager);
             program.Run();
         }
 
@@ -51,6 +62,7 @@ namespace Languages.UI.CA
                         AddIde();
                         break;
                 }
+
                 Console.WriteLine();
             } while (input != 0);
         }
@@ -94,7 +106,7 @@ namespace Languages.UI.CA
                 if (!cont) Console.WriteLine("Ongeldige invoer!");
             } while (!cont);
 
-            foreach (Language lang in _manager.GetLanguageByGenre(input2 - 1))
+            foreach (Language lang in _manager.GetLanguageByGenre((LanguageType) (input2 - 1)))
                 Console.WriteLine(lang);
         }
 
@@ -106,6 +118,7 @@ namespace Languages.UI.CA
                 Console.Write($"{i + 1}={Enum.GetName(typeof(LanguageType), i)}");
                 if (i != Enum.GetValues(typeof(LanguageType)).Length - 1) Console.Write(", ");
             }
+
             Console.Write("): ");
         }
 
@@ -155,7 +168,7 @@ namespace Languages.UI.CA
 
                 try
                 {
-                    _manager.AddLanguage(name, type, release, version);
+                    Console.Write(_manager.AddLanguage(name, type, release, version) + " Successfully added");
                     repeat = false;
                 }
                 catch (ValidationException e)
@@ -193,7 +206,7 @@ namespace Languages.UI.CA
                 double.TryParse(Console.ReadLine(), out double price);
                 try
                 {
-                    _manager.AddIde(name, manufacturer, release, supportedLanguages, price);
+                    Console.WriteLine(_manager.AddIde(name, manufacturer, release, supportedLanguages, price) + " Successfully added");
                     repeat = false;
                 }
                 catch (ValidationException e)

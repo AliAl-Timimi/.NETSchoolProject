@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Languages.BL.Domain;
 using Languages.DAL;
-using Languages.DAL.EF;
 
 namespace Languages.BL
 {
@@ -11,9 +10,9 @@ namespace Languages.BL
     {
         private readonly IRepository _repository;
 
-        public Manager()
+        public Manager(IRepository repository)
         {
-            _repository = new Repository();
+            _repository = repository;
         }
 
         public Ide GetIde(long id)
@@ -36,31 +35,28 @@ namespace Languages.BL
             return _repository.ReadAllLanguages();
         }
 
-        public IEnumerable<Language> GetLanguageByGenre(int type)
+        public IEnumerable<Language> GetLanguageByGenre(LanguageType type)
         {
             return _repository.ReadLanguageByGenre(type);
         }
 
         public IEnumerable<Ide> GetIdeByNameAndReleaseYear(string name, int releaseDate)
         {
-            return  _repository.ReadIdeByNameAndReleaseYear(name, releaseDate);
+            return _repository.ReadIdeByNameAndReleaseYear(name, releaseDate);
         }
 
-        public Ide AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages,
-            double? price)
+        public Ide AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price)
         {
             Ide ide = new Ide(name, manufacturer, releaseDate, supportedLanguages, price);
             Validator.ValidateObject(ide, new ValidationContext(ide), true);
-            _repository.CreateIde(ide);
-            return ide;
+            return _repository.CreateIde(ide) ? ide : null;
         }
 
         public Language AddLanguage(string name, LanguageType type, DateTime releaseDate, double version)
         {
             Language lang = new Language(name, type, releaseDate, version);
             Validator.ValidateObject(lang, new ValidationContext(lang), true);
-            _repository.CreateLanguage(lang);
-            return lang;
+            return _repository.CreateLanguage(lang) ? lang : null;
         }
     }
 }

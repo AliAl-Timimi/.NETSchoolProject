@@ -5,14 +5,18 @@ using static Languages.BL.Domain.LanguageType;
 
 namespace Languages.DAL.EF
 {
-    public class LanguagesInitializer
+    internal static class LanguagesInitializer
     {
+        private static bool _isInitialized;
+
         public static void Initialize(LanguagesDbContext context, bool dropCreatedDatabase = false)
         {
-            if (dropCreatedDatabase)
-                context.Database.EnsureDeleted();
-            if (context.Database.EnsureCreated())
-                Seed(context);
+            if (!_isInitialized)
+            {
+                if (dropCreatedDatabase) context.Database.EnsureDeleted();
+                if (context.Database.EnsureCreated()) Seed(context);
+                _isInitialized = true;
+            }
         }
 
         private static void Seed(LanguagesDbContext context)
@@ -27,7 +31,7 @@ namespace Languages.DAL.EF
             Ide clion = new Ide("CLion", "JetBrains", new DateTime(2015, 4, 14), 1, 71.50);
             Ide intellij = new Ide("IntelliJ", "JetBrains", new DateTime(2019, 12, 12), 2, 300.25);
             Ide pycharm = new Ide("PyCharm", "JetBrains", new DateTime(2010, 2, 3), 2, 119.99);
-            Ide rider= new Ide("Rider", "JetBrains", new DateTime(2017, 2, 4), 1, 83.59);
+            Ide rider = new Ide("Rider", "JetBrains", new DateTime(2017, 2, 4), 1, 83.59);
 
             java.Ides = new List<Ide> {vscode, intellij};
             csharp.Ides = new List<Ide> {vscode, rider};
@@ -41,19 +45,14 @@ namespace Languages.DAL.EF
             pycharm.Languages = new List<Language> {python, js};
             rider.Languages = new List<Language> {csharp};
 
-
             List<Language> languages = new() {java, csharp, python, c, js};
-            for (int i = 0; i < languages.Count; i++) languages[i].Id = i + 1;
-            
             List<Ide> ides = new() {vscode, clion, intellij, pycharm, rider};
-            for (int i = 0; i < ides.Count; i++) ides[i].Id = i + 1;
-            
-            context.Languages.AddRange(new List<Language> {java, csharp, python, c, js});
-            context.Ides.AddRange(new List<Ide> {vscode, clion, intellij, pycharm, rider});
+
+            context.Languages.AddRange(languages);
+            context.Ides.AddRange(ides);
 
             context.SaveChanges();
             context.ChangeTracker.Clear();
         }
-
     }
 }

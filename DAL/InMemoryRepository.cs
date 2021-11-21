@@ -16,7 +16,7 @@ namespace Languages.DAL
         {
             Seed();
         }
-        
+
         private void Seed()
         {
             Language java = new Language("Java", Oopl, new DateTime(1996, 1, 23), 16.02);
@@ -29,7 +29,7 @@ namespace Languages.DAL
             Ide clion = new Ide("CLion", "JetBrains", new DateTime(2015, 4, 14), 1, 71.50);
             Ide intellij = new Ide("IntelliJ", "JetBrains", new DateTime(2019, 12, 12), 2, 300.25);
             Ide pycharm = new Ide("PyCharm", "JetBrains", new DateTime(2010, 2, 3), 2, 119.99);
-            Ide rider= new Ide("Rider", "JetBrains", new DateTime(2017, 2, 4), 1, 83.59);
+            Ide rider = new Ide("Rider", "JetBrains", new DateTime(2017, 2, 4), 1, 83.59);
 
             java.Ides = new List<Ide> {vscode, intellij};
             csharp.Ides = new List<Ide> {vscode, rider};
@@ -46,7 +46,7 @@ namespace Languages.DAL
 
             IEnumerable<Language> languages = new List<Language> {java, csharp, python, c, js};
             foreach (Language language in languages) CreateLanguage(language);
-            
+
             IEnumerable<Ide> ides = new List<Ide> {vscode, clion, intellij, pycharm, rider};
             foreach (Ide ide in ides) CreateIde(ide);
         }
@@ -71,12 +71,11 @@ namespace Languages.DAL
             return _languages;
         }
 
-        public IEnumerable<Language> ReadLanguageByGenre(int type)
+        public IEnumerable<Language> ReadLanguageByGenre(LanguageType type)
         {
-            LanguageType languageType = (LanguageType)type;
             ICollection<Language> tempLanguages = new Collection<Language>();
             foreach (Language language in _languages)
-                if (language.Type.ToString() == languageType.ToString()) tempLanguages.Add(language);
+                if (language.Type.ToString() == type.ToString()) tempLanguages.Add(language);
             return tempLanguages;
         }
 
@@ -86,25 +85,24 @@ namespace Languages.DAL
 
             foreach (Ide ide in _ides)
             {
-                if ((name.Length == 0 || ide.Name.ToLower().Contains(name.ToLower())) &&
-                    (year == 0 || ide.ReleaseDate.Year == year))
-                {
+                if ((name.Length == 0 || ide.Name.ToLower().Contains(name.ToLower())) && (year == 0 || ide.ReleaseDate.Year == year))
                     tempIdes.Add(ide);
-                }
             }
             return tempIdes;
         }
 
-        public void CreateIde(Ide ide)
+        public bool CreateIde(Ide ide)
         {
             _ides.Add(ide);
             ide.Id = _ides.Count;
+            return true;
         }
 
-        public void CreateLanguage(Language language)
+        public bool CreateLanguage(Language language)
         {
             _languages.Add(language);
             language.Id = _languages.Count;
+            return true;
         }
     }
 }
