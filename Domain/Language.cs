@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,7 +22,8 @@ namespace Languages.BL.Domain
         [Range(0.00001, double.PositiveInfinity, ErrorMessage = "Version needs to be filled and above 0")]
         public double Version { get; set; }
 
-        public ICollection<Ide> Ides { get; set; }
+        public ICollection<IdeLanguage> Ides { get; set; }
+        public ICollection<Software> Programs { get; set; }
 
         public Language(string name, LanguageType type, DateTime releaseDate, double version)
         {

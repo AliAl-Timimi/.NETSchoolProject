@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -18,7 +19,8 @@ namespace Languages.BL.Domain
         public string Manufacturer { get; set; }
 
         public DateTime ReleaseDate { get; set; }
-        public ICollection<Language> Languages { get; set; }
+        
+        public ICollection<IdeLanguage> Languages { get; set; }
 
         [Required]
         [Range(0, 10, ErrorMessage = "Supported Languages should be within range 0-10.")]
