@@ -32,6 +32,15 @@ namespace Languages.BL.Domain
             ReleaseDate = releaseDate;
             Version = version;
         }
+        
+        public Language(string name, LanguageType type, DateTime releaseDate, double version, ICollection<IdeLanguage> ides)
+        {
+            Name = name;
+            Type = type;
+            ReleaseDate = releaseDate;
+            Version = version;
+            Ides = ides;
+        }
 
         public override string ToString()
         {

@@ -43,16 +43,20 @@ namespace Languages.DAL.EF
             IdeLanguage python_vscode = new IdeLanguage(vscode, python, 1);
             IdeLanguage c_vscode = new IdeLanguage(vscode, c, 2);
             IdeLanguage js_vscode = new IdeLanguage(vscode, js, 5);
-
             IdeLanguage java_intellij = new IdeLanguage(intellij, java, 1);
             IdeLanguage js_intellij = new IdeLanguage(intellij, js, 2);
-            
             IdeLanguage c_clion = new IdeLanguage(clion, c, 1);
-            
             IdeLanguage python_pycharm = new IdeLanguage(pycharm, python, 1);
             IdeLanguage js_pycharm = new IdeLanguage(pycharm, js, 2);
-
             IdeLanguage csharp_rider = new IdeLanguage(rider, csharp, 1);
+
+            Software spotify = new Software("Spotify", "Music streaming", java);
+            Software netflix = new Software("Netflix", "Video streaming", java);
+            Software instagram = new Software("Instagram", "Social media", python);
+            Software osu = new Software("Osu", "Game", csharp);
+            Software doom = new Software("Doom", "Game", c);
+            
+
             
             java.Ides = new List<IdeLanguage> {java_vscode, java_intellij};
             csharp.Ides = new List<IdeLanguage> {csharp_vscode, csharp_rider};
@@ -74,12 +78,15 @@ namespace Languages.DAL.EF
                 python_pycharm, js_pycharm,
                 csharp_rider
             };
+            List<Software> softwares = new() {spotify, netflix, instagram, osu, doom};
             List<Language> languages = new() {java, csharp, python, c, js};
             List<Ide> ides = new() {vscode, clion, intellij, pycharm, rider};
 
+            
             context.IdeLanguages.AddRange(ideLanguages);
             context.Languages.AddRange(languages);
             context.Ides.AddRange(ides);
+            context.Softwares.AddRange(softwares);
 
             context.SaveChanges();
             context.ChangeTracker.Clear();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Channels;
 using Languages.BL;
 using Languages.BL.Domain;
 using Languages.DAL;
@@ -84,14 +85,32 @@ namespace Languages.UI.CA
         {
             Console.WriteLine("All languages");
             Console.WriteLine("=============");
-            foreach (Language language in _manager.GetAllLanguages()) Console.WriteLine(language);
+            foreach (Language language in _manager.GetAllLanguages())
+            {
+                Console.WriteLine(language);
+                foreach (var software in _manager.GetAllSoftwaresWithLanguages())
+                {
+                    if (software.LanguageUsed == language)
+                    {
+                        Console.WriteLine($"{"Software: ", 10}{software,7}");
+                    }
+                }
+            }
         }
 
         private void PrintIdes()
         {
             Console.WriteLine("All IDEs");
             Console.WriteLine("========");
-            foreach (Ide ide in _manager.GetAllIdes()) Console.WriteLine(ide);
+            foreach (Ide ide in _manager.GetAllIdes())
+            {
+                Console.WriteLine(ide);
+                foreach (IdeLanguage lang in ide.Languages)
+                {
+                    Console.WriteLine($"{lang.Language, 7}");
+                }
+                
+            }
         }
 
         private void LanguageByGenre()

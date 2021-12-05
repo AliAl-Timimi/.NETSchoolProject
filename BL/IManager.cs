@@ -14,5 +14,7 @@ namespace Languages.BL
         public IEnumerable<Ide> GetIdeByNameAndReleaseYear(string name, int releaseDate);
         public Ide AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price);
         public Language AddLanguage(string name, LanguageType type, DateTime releaseDate, double version);
+        public IEnumerable<Software> GetAllSoftwaresWithLanguages();
+        public IEnumerable<Ide> GetAllIdesWithLanguages();
     }
 }

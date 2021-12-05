@@ -23,12 +23,13 @@ namespace Languages.DAL.EF
         {
             modelBuilder.Entity<IdeLanguage>().HasOne(il => il.Ide).WithMany(ide => ide.Languages).HasForeignKey("IdeFK_shadow").OnDelete(DeleteBehavior.Cascade).IsRequired();
             modelBuilder.Entity<IdeLanguage>().HasOne(il => il.Language).WithMany(lang => lang.Ides).HasForeignKey("LanguageFK_shadow").OnDelete(DeleteBehavior.Cascade).IsRequired();
-            modelBuilder.Entity<Software>().HasOne(s => s.LanguageUsed).WithMany(lang => lang.Programs).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Software>().HasOne(s => s.LanguageUsed).WithMany(lang => lang.Programs).HasForeignKey("LanguageSFK_shadow").OnDelete(DeleteBehavior.Cascade);
            
             modelBuilder.Entity<IdeLanguage>().ToTable("tblIdeLanguage").HasKey("IdeFK_shadow", "LanguageFK_shadow");
             modelBuilder.Entity<Ide>().ToTable("tblIdes").HasKey(ide => ide.Id);
             modelBuilder.Entity<Language>().ToTable("tblLanguages").HasKey(lang => lang.Id);
-            
+            modelBuilder.Entity<Software>().ToTable("tblSoftware").HasKey(s => s.id);
+
         }
 
         public LanguagesDbContext()

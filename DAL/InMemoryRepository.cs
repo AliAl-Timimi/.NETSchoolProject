@@ -138,5 +138,15 @@ namespace Languages.DAL
             language.Id = _languages.Count;
             return true;
         }
+
+        public IEnumerable<Software> ReadAllSoftwaresWithLanguage()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Ide> ReadAllIdesWithLanguages()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

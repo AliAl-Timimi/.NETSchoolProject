@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Languages.BL.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Languages.DAL.EF
 {
@@ -64,6 +65,19 @@ namespace Languages.DAL.EF
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
             return true;
+        }
+
+        public IEnumerable<Software> ReadAllSoftwaresWithLanguage()
+        {
+            return  _context.Softwares.Include(s => s.LanguageUsed).AsEnumerable();
+        }
+
+        public IEnumerable<Ide> ReadAllIdesWithLanguages()
+        {
+            return _context.Ides
+                .Include(i => i.Languages)
+                .ThenInclude(c => c.Language)
+                .AsEnumerable();
         }
     }
 }

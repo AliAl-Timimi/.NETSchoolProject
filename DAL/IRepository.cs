@@ -14,5 +14,7 @@ namespace Languages.DAL
         public IEnumerable<Ide> ReadIdeByNameAndReleaseYear(string name, int releaseYear);
         public bool CreateIde(Ide ide);
         public bool CreateLanguage(Language language);
+        public IEnumerable<Software> ReadAllSoftwaresWithLanguage();
+        public IEnumerable<Ide> ReadAllIdesWithLanguages();
     }
 }

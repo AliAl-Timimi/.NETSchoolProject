@@ -37,6 +37,19 @@ namespace Languages.BL.Domain
             SupportedLanguages = supportedLanguages;
             Price = price;
         }
+        
+        
+        /*
+        public Ide(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price, ICollection<IdeLanguage> lang)
+        {
+            Name = name;
+            Manufacturer = manufacturer;
+            ReleaseDate = releaseDate;
+            SupportedLanguages = supportedLanguages;
+            Price = price;
+            Languages = lang;
+        }
+        */
 
         public override string ToString()
         {

@@ -58,5 +58,16 @@ namespace Languages.BL
             Validator.ValidateObject(lang, new ValidationContext(lang), true);
             return _repository.CreateLanguage(lang) ? lang : null;
         }
+
+        public IEnumerable<Software> GetAllSoftwaresWithLanguages()
+        {
+            return _repository.ReadAllSoftwaresWithLanguage();
+        }
+
+        public IEnumerable<Ide> GetAllIdesWithLanguages()
+        {
+            return _repository.ReadAllIdesWithLanguages();
+        }
+
     }
 }

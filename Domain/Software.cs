@@ -12,10 +12,20 @@ namespace Languages.BL.Domain
         [Required]
         public Language LanguageUsed { get; set; }
 
-        public Software(string name, string description)
+        public Software()
+        {
+        }
+
+        public Software(string name, string description, Language l)
         {
             Name = name;
             Description = description;
+            LanguageUsed = l;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name,-10} {Description,10}";
         }
     }
 }
