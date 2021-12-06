@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Languages.BL.Domain;
@@ -69,7 +70,7 @@ namespace Languages.DAL.EF
 
         public IEnumerable<Software> ReadAllSoftwaresWithLanguage()
         {
-            return  _context.Softwares.Include(s => s.LanguageUsed).AsEnumerable();
+            return _context.Softwares.Include(s => s.LanguageUsed).AsEnumerable();
         }
 
         public IEnumerable<Ide> ReadAllIdesWithLanguages()
@@ -78,6 +79,24 @@ namespace Languages.DAL.EF
                 .Include(i => i.Languages)
                 .ThenInclude(c => c.Language)
                 .AsEnumerable();
+        }
+
+        public void CreateIdeLanguage(IdeLanguage ideLanguage)
+        {
+            if (_context.IdeLanguages.Find(ideLanguage.Ide.Id, ideLanguage.Language.Id) != null)
+                throw new ArgumentException("Language is already linked to Ide.");
+            _context.IdeLanguages.Add(ideLanguage);
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+        }
+
+        public void DeleteIdeLanguage(long ideId, long languageId)
+        {
+            if (_context.IdeLanguages.Find(ideId, languageId) == null)
+                throw new ArgumentException("Language is not part of this ide.");
+            _context.IdeLanguages.Remove(_context.IdeLanguages.Find(ideId, languageId));
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
         }
     }
 }

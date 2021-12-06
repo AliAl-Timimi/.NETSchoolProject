@@ -69,5 +69,16 @@ namespace Languages.BL
             return _repository.ReadAllIdesWithLanguages();
         }
 
+        public IdeLanguage AddLanguageToIde(long ideId, long langId)
+        {
+            IdeLanguage ideLanguage = new IdeLanguage(GetIde(ideId), GetLanguage(langId));
+            _repository.CreateIdeLanguage(ideLanguage);
+            return ideLanguage;
+        }
+
+        public void RemoveLanguageFromIde(long ideId, long langId)
+        {
+            _repository.DeleteIdeLanguage(ideId, langId);
+        }
     }
 }

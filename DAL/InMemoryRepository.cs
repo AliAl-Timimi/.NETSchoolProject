@@ -148,5 +148,15 @@ namespace Languages.DAL
         {
             throw new NotImplementedException();
         }
+
+        public void CreateIdeLanguage(IdeLanguage ideLanguage)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteIdeLanguage(long ideId, long languageId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

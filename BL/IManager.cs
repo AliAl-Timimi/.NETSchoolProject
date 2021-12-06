@@ -16,5 +16,9 @@ namespace Languages.BL
         public Language AddLanguage(string name, LanguageType type, DateTime releaseDate, double version);
         public IEnumerable<Software> GetAllSoftwaresWithLanguages();
         public IEnumerable<Ide> GetAllIdesWithLanguages();
+        public IdeLanguage AddLanguageToIde(long ideId, long langId);
+        public void RemoveLanguageFromIde(long ideId, long langId);
+
+        
     }
 }

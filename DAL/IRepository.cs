@@ -16,5 +16,7 @@ namespace Languages.DAL
         public bool CreateLanguage(Language language);
         public IEnumerable<Software> ReadAllSoftwaresWithLanguage();
         public IEnumerable<Ide> ReadAllIdesWithLanguages();
+        public void CreateIdeLanguage(IdeLanguage ideLanguage);
+        public void DeleteIdeLanguage(long ideId, long languageId);
     }
 }
