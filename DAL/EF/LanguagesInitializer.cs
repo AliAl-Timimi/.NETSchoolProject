@@ -38,17 +38,17 @@ namespace Languages.DAL.EF
             //Software create
             
             // IdeLanguage creation (linking class between Ide and Language with a popularity order for ordering languages inside Ide)
-            IdeLanguage java_vscode = new IdeLanguage(vscode, java, 4);
-            IdeLanguage csharp_vscode = new IdeLanguage(vscode, csharp, 3);
-            IdeLanguage python_vscode = new IdeLanguage(vscode, python, 1);
-            IdeLanguage c_vscode = new IdeLanguage(vscode, c, 2);
-            IdeLanguage js_vscode = new IdeLanguage(vscode, js, 5);
-            IdeLanguage java_intellij = new IdeLanguage(intellij, java, 1);
-            IdeLanguage js_intellij = new IdeLanguage(intellij, js, 2);
-            IdeLanguage c_clion = new IdeLanguage(clion, c, 1);
-            IdeLanguage python_pycharm = new IdeLanguage(pycharm, python, 1);
-            IdeLanguage js_pycharm = new IdeLanguage(pycharm, js, 2);
-            IdeLanguage csharp_rider = new IdeLanguage(rider, csharp, 1);
+            IdeLanguage javaVscode = new IdeLanguage(vscode, java, 4);
+            IdeLanguage csharpVscode = new IdeLanguage(vscode, csharp, 3);
+            IdeLanguage pythonVscode = new IdeLanguage(vscode, python, 1);
+            IdeLanguage cVscode = new IdeLanguage(vscode, c, 2);
+            IdeLanguage jsVscode = new IdeLanguage(vscode, js, 5);
+            IdeLanguage javaIntellij = new IdeLanguage(intellij, java, 1);
+            IdeLanguage jsIntellij = new IdeLanguage(intellij, js, 2);
+            IdeLanguage cClion = new IdeLanguage(clion, c, 1);
+            IdeLanguage pythonPycharm = new IdeLanguage(pycharm, python, 1);
+            IdeLanguage jsPycharm = new IdeLanguage(pycharm, js, 2);
+            IdeLanguage csharpRider = new IdeLanguage(rider, csharp, 1);
 
             Software spotify = new Software("Spotify", "Music streaming", java);
             Software netflix = new Software("Netflix", "Video streaming", java);
@@ -58,35 +58,36 @@ namespace Languages.DAL.EF
             
 
             
-            java.Ides = new List<IdeLanguage> {java_vscode, java_intellij};
-            csharp.Ides = new List<IdeLanguage> {csharp_vscode, csharp_rider};
-            python.Ides = new List<IdeLanguage> {python_vscode, python_vscode};
-            c.Ides = new List<IdeLanguage> {c_vscode, c_clion};
-            js.Ides = new List<IdeLanguage> {js_vscode, js_intellij, js_pycharm};
+            java.Ides = new List<IdeLanguage> {javaVscode, javaIntellij};
+            csharp.Ides = new List<IdeLanguage> {csharpVscode, csharpRider};
+            python.Ides = new List<IdeLanguage> {pythonVscode, pythonVscode};
+            c.Ides = new List<IdeLanguage> {cVscode, cClion};
+            js.Ides = new List<IdeLanguage> {jsVscode, jsIntellij, jsPycharm};
 
-            vscode.Languages = new List<IdeLanguage> {java_vscode, csharp_vscode, python_vscode, c_vscode, js_vscode};
-            clion.Languages = new List<IdeLanguage> {c_clion};
-            intellij.Languages = new List<IdeLanguage> {java_intellij, js_intellij};
-            pycharm.Languages = new List<IdeLanguage> {python_pycharm, js_pycharm};
-            rider.Languages = new List<IdeLanguage> {csharp_rider};
+            vscode.Languages = new List<IdeLanguage> {javaVscode, csharpVscode, pythonVscode, cVscode, jsVscode};
+            clion.Languages = new List<IdeLanguage> {cClion};
+            intellij.Languages = new List<IdeLanguage> {javaIntellij, jsIntellij};
+            pycharm.Languages = new List<IdeLanguage> {pythonPycharm, jsPycharm};
+            rider.Languages = new List<IdeLanguage> {csharpRider};
 
             List<IdeLanguage> ideLanguages = new()
             {
-                java_vscode, csharp_vscode, python_vscode, c_vscode, js_vscode,
-                java_intellij, js_intellij,
-                c_clion,
-                python_pycharm, js_pycharm,
-                csharp_rider
+                javaVscode, csharpVscode, pythonVscode, cVscode, jsVscode,
+                javaIntellij, jsIntellij,
+                cClion,
+                pythonPycharm, jsPycharm,
+                csharpRider
             };
-            List<Software> softwares = new() {spotify, netflix, instagram, osu, doom};
+            List<Software> software = new() {spotify, netflix, instagram, osu, doom};
             List<Language> languages = new() {java, csharp, python, c, js};
             List<Ide> ides = new() {vscode, clion, intellij, pycharm, rider};
 
             
-            context.IdeLanguages.AddRange(ideLanguages);
             context.Languages.AddRange(languages);
             context.Ides.AddRange(ides);
-            context.Softwares.AddRange(softwares);
+            context.Softwares.AddRange(software);
+            context.IdeLanguages.AddRange(ideLanguages);
+
 
             context.SaveChanges();
             context.ChangeTracker.Clear();

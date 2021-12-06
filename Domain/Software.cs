@@ -25,7 +25,7 @@ namespace Languages.BL.Domain
 
         public override string ToString()
         {
-            return $"{Name,-10} {Description,10}";
+            return $"{Name,-10} {Description,-15}";
         }
     }
 }

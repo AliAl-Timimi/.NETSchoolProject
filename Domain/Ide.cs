@@ -39,7 +39,7 @@ namespace Languages.BL.Domain
         }
         
         
-        /*
+        
         public Ide(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price, ICollection<IdeLanguage> lang)
         {
             Name = name;
@@ -49,12 +49,12 @@ namespace Languages.BL.Domain
             Price = price;
             Languages = lang;
         }
-        */
+        
 
         public override string ToString()
         {
             return
-                $"{Name,-15} created by {Manufacturer,10} (released {ReleaseDate:dd/MM/yyyy}) for {SupportedLanguages,2} language(s) price: {(Price != null ? Price : 0.00)}";
+                $"{Name,-15} created by {Manufacturer,10} (released {ReleaseDate:dd/MM/yyyy}) for {SupportedLanguages,2} language(s) price: {(Price != null ? Price : 0.00), 6}";
             // return Name + " created by" + Manufacturer + " (released " + FormattedRelease() + ") for "+ SupportedLanguages  +" languages price: " + Price;
         }
 

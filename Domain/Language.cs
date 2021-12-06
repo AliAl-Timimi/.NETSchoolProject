@@ -44,7 +44,7 @@ namespace Languages.BL.Domain
 
         public override string ToString()
         {
-            return $"{Type,4} {Name,-15} (released {ReleaseDate:dd/MM/yyyy}) current version: {Version,5}";
+            return $"{Type,-4} {Name,-15} (released {ReleaseDate:dd/MM/yyyy}) current version: {Version,5}";
         }
     }
 }
