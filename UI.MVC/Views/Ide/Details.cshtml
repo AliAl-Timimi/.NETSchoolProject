@@ -31,27 +31,30 @@
                 }
             </dd>
         </dl>
-        <h3>Languages</h3>
-        <table class="table table-striped mt-4 order-top border table-dark">
-            <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Release Date</th>
-                <th>Version</th>
-                <th></th>
-            </tr>
-            @foreach (var lang in Model.Languages)
-            {
-                <tr class="border-top border-bottom">
-                    <td>@lang.Language.Name</td>
-                    <td>@lang.Language.Type.ToString()</td>
-                    <td>@lang.Language.ReleaseDate.ToString("dd/MM/yyyy")</td>
-                    <td>@lang.Language.Version</td>
-                    <td>
-                        <a asp-area="" asp-controller="Language" asp-action="Details" asp-route-id="@lang.Language.Id">Details</a>
-                    </td>
+        @if (Model.Languages.Count != 0)
+        {
+            <h3>Languages</h3>
+            <table class="table table-striped mt-4 order-top border">
+                <tr class="bg-secondary text-light">
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Release Date</th>
+                    <th>Version</th>
+                    <th></th>
                 </tr>
-            }
-        </table>
+                @foreach (var lang in Model.Languages)
+                {
+                    <tr class="border-top border-bottom">
+                        <td>@lang.Language.Name</td>
+                        <td>@lang.Language.Type.ToString()</td>
+                        <td>@lang.Language.ReleaseDate.ToString("dd/MM/yyyy")</td>
+                        <td>@lang.Language.Version</td>
+                        <td>
+                            <a asp-area="" asp-controller="Language" asp-action="Details" asp-route-id="@lang.Language.Id">Details</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
     </div>
 </div>

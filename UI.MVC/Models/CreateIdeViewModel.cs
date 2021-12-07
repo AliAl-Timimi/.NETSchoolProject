@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Languages.UI.MVC.Models
 {
-    public class CreateIdeViewModel : IValidatableObject
+    public class CreateIdeViewModel
     {
         [Required]
         [MinLength(3, ErrorMessage = "Name can not be under 3 characters long.")]
@@ -14,6 +14,7 @@ namespace Languages.UI.MVC.Models
         [MinLength(3, ErrorMessage = "Manufacturer can not be under 3 characters long.")]
         public string Manufacturer { get; set; }
         
+        [RealeaseDate] 
         public DateTime ReleaseDate { get; set; }
         
         [Required]
@@ -22,22 +23,26 @@ namespace Languages.UI.MVC.Models
         [Range(0, 3000, ErrorMessage = "Price should be within range 0-3000")]
         public double? Price { get; set; }
         
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        
+    }
+    
+    public sealed class RealeaseDateAttribute : ValidationAttribute
+    { 
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            List<ValidationResult> errors = new List<ValidationResult>();
-            if (ReleaseDate > DateTime.Now)
+            string message;
+            DateTime dt = (DateTime) value;
+            if (dt > DateTime.Now)
             {
-                string errorMessage = "IDE can't be added before release, come back later.";
-                errors.Add(new ValidationResult(errorMessage,
-                    new[] {"ReleaseDate"}));
+                message = "IDE can't be added before release, come back later.";
+                return new ValidationResult(message);
             }
-            if (ReleaseDate == new DateTime(1, 1, 1))
+            if (dt == new DateTime(1, 1, 1))
             {
-                string errorMessage = "Release date is invalid/in the wrong format";
-                errors.Add(new ValidationResult(errorMessage,
-                    new[] {"ReleaseDate"}));
+                message = "Release date is invalid/in the wrong format";
+                return new ValidationResult(message);
             }
-            return errors;
+            return ValidationResult.Success;
         }
     }
 }

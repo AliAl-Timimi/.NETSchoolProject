@@ -62,7 +62,6 @@ namespace Languages.BL.Domain
                 errors.Add(new ValidationResult(errorMessage,
                     new[] {"ReleaseDate"}));
             }
-
             return errors;
         }
     }

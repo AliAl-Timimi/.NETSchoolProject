@@ -7,8 +7,8 @@
 <div class="card">
     <div class="card-body">
         <h2>All Ides</h2>
-        <table class="table table-dark table-striped table-bordered mt-4">
-            <tr>
+        <table class="table table-striped table-bordered mt-4">
+            <tr class="bg-secondary text-light">
                 <th>
                     Name
                 </th>
@@ -47,7 +47,6 @@
                     <td>
                         <a asp-area="" asp-controller="Ide" asp-action="Details" asp-route-id="@ide.Id">Details</a>
                     </td>
-
                 </tr>
             }
         </table>
