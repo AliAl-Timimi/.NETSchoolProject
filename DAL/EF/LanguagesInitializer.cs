@@ -29,7 +29,7 @@ namespace Languages.DAL.EF
             Language js = new Language("JavaScript", Oopl, new DateTime(1995, 12, 4), 12.0);
 
             // Ide creation
-            Ide vscode = new Ide("VSCode", "Microsoft", new DateTime(2015, 4, 29), 5, null);
+            Ide vscode = new Ide("VSCode", "Microsoft", new DateTime(2015, 4, 29), 5, 0);
             Ide clion = new Ide("CLion", "JetBrains", new DateTime(2015, 4, 14), 1, 71.50);
             Ide intellij = new Ide("IntelliJ", "JetBrains", new DateTime(2019, 12, 12), 2, 300.25);
             Ide pycharm = new Ide("PyCharm", "JetBrains", new DateTime(2010, 2, 3), 2, 119.99);

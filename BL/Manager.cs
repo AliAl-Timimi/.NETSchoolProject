@@ -45,11 +45,11 @@ namespace Languages.BL
             return _repository.ReadIdeByNameAndReleaseYear(name, releaseDate);
         }
 
-        public Ide AddIde(string name, string manufacturer, DateTime releaseDate, int supportedLanguages, double? price)
+        public Ide AddIde(string name, string manufacturer, DateTime releaseDate, int? supportedLanguages, double? price)
         {
-            Ide ide = new Ide(name, manufacturer, releaseDate, supportedLanguages, price);
+            Ide ide = new Ide(name, manufacturer, releaseDate, supportedLanguages, price??0);
             Validator.ValidateObject(ide, new ValidationContext(ide), true);
-            return _repository.CreateIde(ide) ? ide : null;
+            return _repository.CreateIde(ide);
         }
 
         public Language AddLanguage(string name, LanguageType type, DateTime releaseDate, double version)
@@ -79,6 +79,16 @@ namespace Languages.BL
         public void RemoveLanguageFromIde(long ideId, long langId)
         {
             _repository.DeleteIdeLanguage(ideId, langId);
+        }
+
+        public Ide GetIdeWithLanguages(long id)
+        {
+            return _repository.ReadIdeWithLanguages(id);
+        }
+
+        public Language GetLanguageWithSoftware(long id)
+        {
+            return _repository.ReadLanguageWithSoftware(id);
         }
     }
 }

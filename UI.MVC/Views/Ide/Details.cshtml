@@ -1,0 +1,57 @@
+@model Languages.BL.Domain.Ide
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "_Layout";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2>IDE Details</h2>
+
+        <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+            <dt class="col-sm-3">Manufacturor</dt>
+            <dd class="col-sm-9">@Model.Manufacturer</dd>
+            <dt class="col-sm-3">Release Date</dt>
+            <dd class="col-sm-9">@Model.ReleaseDate.ToString("dd/MM/yyyy")</dd>
+            <dt class="col-sm-3"># Supported Languages</dt>
+            <dd class="col-sm-9">@Model.SupportedLanguages</dd>
+            <dt class="col-sm-3">Price</dt>
+            <dd class="col-sm-9">
+                @if (Model.Price is null or 0)
+                {
+                    @:Free
+                }
+                else
+                {
+                    @:&euro;
+                    @Model.Price
+                }
+            </dd>
+        </dl>
+        <h3>Languages</h3>
+        <table class="table table-striped mt-4 order-top border table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Release Date</th>
+                <th>Version</th>
+                <th></th>
+            </tr>
+            @foreach (var lang in Model.Languages)
+            {
+                <tr class="border-top border-bottom">
+                    <td>@lang.Language.Name</td>
+                    <td>@lang.Language.Type.ToString()</td>
+                    <td>@lang.Language.ReleaseDate.ToString("dd/MM/yyyy")</td>
+                    <td>@lang.Language.Version</td>
+                    <td>
+                        <a asp-area="" asp-controller="Language" asp-action="Details" asp-route-id="@lang.Language.Id">Details</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+@model System.Collections.Generic.IEnumerable<Languages.BL.Domain.Ide>
+
+@{
+    ViewBag.Title = "Ide";
+    Layout = "_Layout";
+}
+<div class="card">
+    <div class="card-body">
+        <h2>All Ides</h2>
+        <table class="table table-dark table-striped table-bordered mt-4">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Manufacturer
+                </th>
+                <th>
+                    Release Date
+                </th>
+                <th>
+                    # Supported Languages
+                </th>
+                <th>
+                    Price
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var ide in Model)
+            {
+                <tr>
+                    <td>@ide.Name</td>
+                    <td>@ide.Manufacturer</td>
+                    <td>@ide.ReleaseDate.ToString("dd/MM/yyyy")</td>
+                    <td>@ide.SupportedLanguages</td>
+                    <td>
+                        @if (ide.Price is null or 0)
+                        {
+                            @:Free
+                        }
+                        else
+                        {
+                            @:&euro;
+                            @ide.Price
+                        }
+                    </td>
+                    <td>
+                        <a asp-area="" asp-controller="Ide" asp-action="Details" asp-route-id="@ide.Id">Details</a>
+                    </td>
+
+                </tr>
+            }
+        </table>
+    </div>
+</div>

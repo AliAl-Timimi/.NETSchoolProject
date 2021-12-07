@@ -52,12 +52,17 @@ namespace Languages.DAL.EF
             return idesQueryable.AsEnumerable();
         }
 
-        public bool CreateIde(Ide ide)
+        public Ide CreateIde(Ide ide)
         {
             _context.Ides.Add(ide);
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
-            return true;
+            IQueryable<Ide> idesQueryable = _context.Ides;
+            idesQueryable = idesQueryable.Where(i => i.Name.ToLower() == ide.Name.ToLower());
+            idesQueryable = idesQueryable.Where(i => i.ReleaseDate == ide.ReleaseDate);
+            idesQueryable = idesQueryable.Where(i => (int) i.Price == (int) ide.Price);
+            idesQueryable = idesQueryable.Where(i =>  i.SupportedLanguages == ide.SupportedLanguages);
+            return idesQueryable.First();
         }
 
         public bool CreateLanguage(Language language)
@@ -65,6 +70,7 @@ namespace Languages.DAL.EF
             _context.Languages.Add(language);
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
+            
             return true;
         }
 
@@ -97,6 +103,23 @@ namespace Languages.DAL.EF
             _context.IdeLanguages.Remove(_context.IdeLanguages.Find(ideId, languageId));
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
+        }
+
+        public Ide ReadIdeWithLanguages(long id)
+        {
+            return _context.Ides
+                .Include(i => i.Languages)
+                .ThenInclude(c => c.Language)
+                .FirstOrDefault(ide => ide.Id == id);
+        }
+        
+        public Language ReadLanguageWithSoftware(long id)
+        {
+            return _context.Languages
+                .Include(s => s.Programs)
+                .Include(i => i.Ides)
+                .ThenInclude(c => c.Language)
+                .FirstOrDefault(ide => ide.Id == id);
         }
     }
 }

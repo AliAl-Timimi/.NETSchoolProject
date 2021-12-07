@@ -27,7 +27,7 @@ namespace Languages.DAL
             Language js = new Language("JavaScript", Oopl, new DateTime(1995, 12, 4), 12.0);
 
             // Ide creation
-            Ide vscode = new Ide("VSCode", "Microsoft", new DateTime(2015, 4, 29), 5, null);
+            Ide vscode = new Ide("VSCode", "Microsoft", new DateTime(2015, 4, 29), 5, 0);
             Ide clion = new Ide("CLion", "JetBrains", new DateTime(2015, 4, 14), 1, 71.50);
             Ide intellij = new Ide("IntelliJ", "JetBrains", new DateTime(2019, 12, 12), 2, 300.25);
             Ide pycharm = new Ide("PyCharm", "JetBrains", new DateTime(2010, 2, 3), 2, 119.99);
@@ -125,11 +125,11 @@ namespace Languages.DAL
             return tempIdes;
         }
 
-        public bool CreateIde(Ide ide)
+        public Ide CreateIde(Ide ide)
         {
             _ides.Add(ide);
             ide.Id = _ides.Count;
-            return true;
+            return ide;
         }
 
         public bool CreateLanguage(Language language)
@@ -155,6 +155,16 @@ namespace Languages.DAL
         }
 
         public void DeleteIdeLanguage(long ideId, long languageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Ide ReadIdeWithLanguages(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Language ReadLanguageWithSoftware(long id)
         {
             throw new NotImplementedException();
         }

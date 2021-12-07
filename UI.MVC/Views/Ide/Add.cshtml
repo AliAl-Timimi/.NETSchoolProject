@@ -1,0 +1,54 @@
+@model Languages.UI.MVC.Models.CreateIdeViewModel
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "_Layout";
+}
+<div class="card">
+    <div class="card-body">
+        <h2>Add IDE</h2>
+        <form asp-controller="Ide" asp-action="Add" method="post">
+            <div class="form-group row">
+                <label asp-for="Name" class="col-sm-3">Name</label>
+                <div class="col-sm-9">
+                    <input asp-for="Name" autocomplete="off" class="form-control" placeholder='VSCode'>
+                </div>
+                <span asp-validation-for="Name" class="text-danger ml-3"></span>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3" asp-for="Manufacturer">Manufacturer</label>
+                <div class="col-sm-9">
+                    <input asp-for="Manufacturer" autocomplete="off" class="form-control" placeholder='Microsoft'>
+                    </div>
+                <span asp-validation-for="Manufacturer" class="text-danger ml-3"></span>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3" asp-for="ReleaseDate">Release Date</label>
+                <div class="col-sm-9">
+                    <input asp-for="ReleaseDate" class="form-control" type="text" placeholder='@DateTime.Now.ToString("dd/MM/yyyy")'>
+                    </div>
+                <span asp-validation-for="ReleaseDate" class="text-danger ml-3"></span>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3" asp-for="SupportedLanguages">Amount of Supported Languages</label>
+                <div class="col-sm-9">
+                    <input asp-for="SupportedLanguages" autocomplete="off" class="form-control" placeholder='3'>
+                    </div>
+                <span asp-validation-for="SupportedLanguages" class="text-danger ml-3"></span>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3" asp-for="Price">Price in &euro; </label>
+                <div class="col-sm-9">
+                    <input asp-for="Price" autocomplete="off" class="form-control" placeholder='50'>
+                </div>
+                <span asp-validation-for="Price" class="text-danger ml-3"></span>
+            </div>
+            <a class="btn btn-danger mt-2 mr-2" asp-area="" asp-controller="Ide" asp-action="Index">Cancel</a>
+            <button type="submit" class="btn btn-primary mt-2">Save</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+@model Languages.BL.Domain.Language
+
+@{
+    ViewBag.Title = @Model.Name;
+    Layout = "_Layout";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2>Language Details</h2>
+
+        <table class="table table-borderless">
+            <tr>
+                <th class="col-4">Name</th>
+                <td>@Model.Name</td>
+            </tr>
+            <tr>
+                <th class="col-4">Type</th>
+                <td>@Model.Type.ToString()</td>
+            </tr>
+            <tr>
+                <th class="col-4">Release Date</th>
+                <td>@Model.ReleaseDate.ToString("dd/MM/yyyy")</td>
+            </tr>
+            <tr>
+                <th class="col-4">Version</th>
+                <td>
+                    @Model.Version
+                </td>
+            </tr>
+        </table>
+        <h3>Programs</h3>
+        <table class="table table-striped mt-4 order-top border table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            @foreach (var lang in Model.Programs)
+            {
+                <tr class="border-top border-bottom">
+                    <td>@lang.Name</td>
+                    <td>@lang.Description</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
