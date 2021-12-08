@@ -4,14 +4,6 @@ namespace Languages.BL.Domain
 {
     public class Software
     {
-        [Key] public long id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        public string Description { get; set; }
-
-        [Required]
-        public Language LanguageUsed { get; set; }
-
         public Software()
         {
         }
@@ -22,6 +14,14 @@ namespace Languages.BL.Domain
             Description = description;
             LanguageUsed = l;
         }
+
+        [Key] public long id { get; set; }
+
+        [Required] public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        [Required] public Language LanguageUsed { get; set; }
 
         public override string ToString()
         {

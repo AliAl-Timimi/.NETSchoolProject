@@ -61,7 +61,7 @@ namespace Languages.DAL.EF
             idesQueryable = idesQueryable.Where(i => i.Name.ToLower() == ide.Name.ToLower());
             idesQueryable = idesQueryable.Where(i => i.ReleaseDate == ide.ReleaseDate);
             idesQueryable = idesQueryable.Where(i => (int) i.Price == (int) ide.Price);
-            idesQueryable = idesQueryable.Where(i =>  i.SupportedLanguages == ide.SupportedLanguages);
+            idesQueryable = idesQueryable.Where(i => i.SupportedLanguages == ide.SupportedLanguages);
             return idesQueryable.First();
         }
 
@@ -70,7 +70,7 @@ namespace Languages.DAL.EF
             _context.Languages.Add(language);
             _context.SaveChanges();
             _context.ChangeTracker.Clear();
-            
+
             return true;
         }
 
@@ -112,7 +112,7 @@ namespace Languages.DAL.EF
                 .ThenInclude(c => c.Language)
                 .FirstOrDefault(ide => ide.Id == id);
         }
-        
+
         public Language ReadLanguageWithSoftware(long id)
         {
             return _context.Languages

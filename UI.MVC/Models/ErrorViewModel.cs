@@ -1,6 +1,4 @@
-using System;
-
-namespace Languages.UI.MVC.Models
+namespace Languages.Models
 {
     public class ErrorViewModel
     {

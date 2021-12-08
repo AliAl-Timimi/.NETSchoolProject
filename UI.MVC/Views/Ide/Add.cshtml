@@ -1,4 +1,4 @@
-@model Languages.UI.MVC.Models.CreateIdeViewModel
+@model CreateIdeViewModel
 
 @{
     ViewBag.Title = "Add";
@@ -20,7 +20,7 @@
                 <label class="col-sm-3" asp-for="Manufacturer">Manufacturer</label>
                 <div class="col-sm-9">
                     <input asp-for="Manufacturer" autocomplete="off" class="form-control" placeholder="Microsoft">
-                    </div>
+                </div>
                 <span asp-validation-for="Manufacturer" class="text-danger ml-3"></span>
             </div>
 
@@ -28,7 +28,7 @@
                 <label class="col-sm-3" asp-for="ReleaseDate">Release Date</label>
                 <div class="col-sm-9">
                     <input asp-for="ReleaseDate" class="form-control" type="text" placeholder='@DateTime.Now.ToString("dd/MM/yyyy")'>
-                    </div>
+                </div>
                 <span asp-validation-for="ReleaseDate" class="text-danger ml-3"></span>
             </div>
 
@@ -36,7 +36,7 @@
                 <label class="col-sm-3" asp-for="SupportedLanguages">Amount of Supported Languages</label>
                 <div class="col-sm-9">
                     <input asp-for="SupportedLanguages" autocomplete="off" class="form-control" placeholder="3">
-                    </div>
+                </div>
                 <span asp-validation-for="SupportedLanguages" class="text-danger ml-3"></span>
             </div>
 

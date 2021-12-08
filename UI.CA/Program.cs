@@ -8,7 +8,7 @@ using Languages.DAL.EF;
 
 namespace Languages.UI.CA
 {
-    class Program
+    internal class Program
     {
         private readonly IManager _manager;
 
@@ -17,14 +17,14 @@ namespace Languages.UI.CA
             _manager = manager;
         }
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.BackgroundColor = ConsoleColor.Black;
-            LanguagesDbContext context = new LanguagesDbContext();
+            var context = new LanguagesDbContext();
             IRepository repository = new Repository(context);
             IManager manager = new Manager(repository);
 
-            Program program = new Program(manager);
+            var program = new Program(manager);
             program.Run();
         }
 
@@ -92,7 +92,6 @@ namespace Languages.UI.CA
             Console.WriteLine("6) Add an IDE");
             Console.WriteLine("7) Add language to Ide");
             Console.WriteLine("8) Remove language from Ide");
-
         }
 
         private void PrintLanguages()
@@ -101,15 +100,13 @@ namespace Languages.UI.CA
             Console.WriteLine("All languages");
             Console.WriteLine("=============");
             Console.ResetColor();
-            foreach (Language language in _manager.GetAllLanguages())
+            foreach (var language in _manager.GetAllLanguages())
             {
                 Console.WriteLine($"{language}", Console.ForegroundColor = ConsoleColor.Green);
                 foreach (var software in _manager.GetAllSoftwaresWithLanguages())
-                {
                     if (software.LanguageUsed == language)
                         Console.WriteLine($"{"Software:",18}{software,31}",
                             Console.ForegroundColor = ConsoleColor.Magenta);
-                }
             }
         }
 
@@ -118,10 +115,10 @@ namespace Languages.UI.CA
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("All IDEs");
             Console.WriteLine("========");
-            foreach (Ide ide in _manager.GetAllIdesWithLanguages())
+            foreach (var ide in _manager.GetAllIdesWithLanguages())
             {
                 Console.WriteLine($"{ide}", Console.ForegroundColor = ConsoleColor.Cyan);
-                foreach (IdeLanguage lang in ide.Languages)
+                foreach (var lang in ide.Languages)
                     Console.WriteLine($"{"Language:",18}{lang.Language,74}",
                         Console.ForegroundColor = ConsoleColor.Green);
                 Console.ForegroundColor = ConsoleColor.Gray;
@@ -140,17 +137,17 @@ namespace Languages.UI.CA
                 if (!cont) Console.WriteLine("Ongeldige invoer!");
             } while (!cont);
 
-            foreach (Language lang in _manager.GetLanguageByGenre((LanguageType) (input2 - 1)))
+            foreach (var lang in _manager.GetLanguageByGenre((LanguageType) (input2 - 1)))
                 Console.WriteLine($"{lang}", Console.ForegroundColor = ConsoleColor.Green);
         }
 
         private void PrintEnum()
         {
             Console.Write("Language ");
-            Console.Write($"type", Console.ForegroundColor = ConsoleColor.Yellow);
+            Console.Write("type", Console.ForegroundColor = ConsoleColor.Yellow);
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(" (");
-            for (int i = 0; i < Enum.GetValues(typeof(LanguageType)).Length; i++)
+            for (var i = 0; i < Enum.GetValues(typeof(LanguageType)).Length; i++)
             {
                 Console.Write($"{i + 1}=");
                 Console.Write($"{Enum.GetName(typeof(LanguageType), i)}",
@@ -168,14 +165,14 @@ namespace Languages.UI.CA
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("Enter (part of) a name or leave blank: ");
             Console.ForegroundColor = ConsoleColor.Blue;
-            string search = Console.ReadLine();
-            int year = 0;
+            var search = Console.ReadLine();
+            var year = 0;
             do
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Enter a year or leave blank: ");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                string yearinput = Console.ReadLine();
+                var yearinput = Console.ReadLine();
                 if (!string.IsNullOrEmpty(yearinput))
                 {
                     cont = int.TryParse(yearinput, out year) && year <= DateTime.Now.Year;
@@ -183,16 +180,19 @@ namespace Languages.UI.CA
                     if (!cont) Console.WriteLine(year + "\nOngeldige invoer!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-                else cont = true;
+                else
+                {
+                    cont = true;
+                }
             } while (!cont);
 
-            foreach (Ide ide in _manager.GetIdeByNameAndReleaseYear(search, year))
+            foreach (var ide in _manager.GetIdeByNameAndReleaseYear(search, year))
                 Console.WriteLine($"{ide}", Console.ForegroundColor = ConsoleColor.Cyan);
         }
 
         private void AddLanguage()
         {
-            bool repeat = true;
+            var repeat = true;
             while (repeat)
             {
                 Console.WriteLine("Add Language");
@@ -202,25 +202,25 @@ namespace Languages.UI.CA
                 Console.Write("Name: ");
 
                 Console.ForegroundColor = ConsoleColor.Blue;
-                string name = Console.ReadLine();
+                var name = Console.ReadLine();
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 PrintEnum();
                 Console.ForegroundColor = ConsoleColor.Blue;
-                int.TryParse(Console.ReadLine(), out int typeInt);
+                int.TryParse(Console.ReadLine(), out var typeInt);
                 if (typeInt > Enum.GetValues(typeof(LanguageType)).Length) typeInt = -1;
 
-                LanguageType type = (LanguageType) typeInt - 1;
+                var type = (LanguageType) typeInt - 1;
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Release date (yyyy/mm/dd): ");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                DateTime.TryParse(Console.ReadLine(), out DateTime release);
+                DateTime.TryParse(Console.ReadLine(), out var release);
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Version: ");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                double.TryParse(Console.ReadLine(), out double version);
+                double.TryParse(Console.ReadLine(), out var version);
 
                 try
                 {
@@ -240,7 +240,7 @@ namespace Languages.UI.CA
 
         private void AddIde()
         {
-            bool repeat = true;
+            var repeat = true;
             while (repeat)
             {
                 Console.ForegroundColor = ConsoleColor.White;
@@ -250,25 +250,25 @@ namespace Languages.UI.CA
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Name: ");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                string name = Console.ReadLine();
+                var name = Console.ReadLine();
 
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Manufacturer: ");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                string manufacturer = Console.ReadLine();
+                var manufacturer = Console.ReadLine();
 
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Release date (yyyy/mm/dd): ");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                DateTime.TryParse(Console.ReadLine(), out DateTime release);
+                DateTime.TryParse(Console.ReadLine(), out var release);
 
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Amount of supported languages: ");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                string amountSup = Console.ReadLine();
+                var amountSup = Console.ReadLine();
 
                 int supportedLanguages;
                 if (!string.IsNullOrEmpty(amountSup))
@@ -278,7 +278,7 @@ namespace Languages.UI.CA
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Price: ");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                double.TryParse(Console.ReadLine(), out double price);
+                double.TryParse(Console.ReadLine(), out var price);
                 try
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -296,7 +296,7 @@ namespace Languages.UI.CA
 
         private void AddLanguageToIde()
         {
-            bool repeat = true;
+            var repeat = true;
             while (repeat)
             {
                 Console.ForegroundColor = ConsoleColor.White;
@@ -306,9 +306,9 @@ namespace Languages.UI.CA
                 int idIde;
                 do
                 {
-                    Console.Write($"[0] ", Console.ForegroundColor = ConsoleColor.Yellow);
-                    Console.WriteLine($"Cancel", Console.ForegroundColor = ConsoleColor.Magenta);
-                    foreach (Ide ide in _manager.GetAllIdes())
+                    Console.Write("[0] ", Console.ForegroundColor = ConsoleColor.Yellow);
+                    Console.WriteLine("Cancel", Console.ForegroundColor = ConsoleColor.Magenta);
+                    foreach (var ide in _manager.GetAllIdes())
                     {
                         Console.Write($"[{ide.Id}] ", Console.ForegroundColor = ConsoleColor.Yellow);
                         Console.WriteLine($"{ide}", Console.ForegroundColor = ConsoleColor.Cyan);
@@ -317,7 +317,7 @@ namespace Languages.UI.CA
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("Please enter an ide ID: ");
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    cont = Int32.TryParse(Console.ReadLine(), out idIde)
+                    cont = int.TryParse(Console.ReadLine(), out idIde)
                            && idIde > 0 && idIde <= _manager.GetAllIdes().ToList().Count;
                     if (idIde == 0)
                         return;
@@ -331,9 +331,9 @@ namespace Languages.UI.CA
                 int idLang;
                 do
                 {
-                    Console.Write($"[0] ", Console.ForegroundColor = ConsoleColor.Yellow);
-                    Console.WriteLine($"Cancel", Console.ForegroundColor = ConsoleColor.Magenta);
-                    foreach (Language l in _manager.GetAllLanguages())
+                    Console.Write("[0] ", Console.ForegroundColor = ConsoleColor.Yellow);
+                    Console.WriteLine("Cancel", Console.ForegroundColor = ConsoleColor.Magenta);
+                    foreach (var l in _manager.GetAllLanguages())
                     {
                         Console.Write($"[{l.Id}] ", Console.ForegroundColor = ConsoleColor.Yellow);
                         Console.WriteLine($"{l}", Console.ForegroundColor = ConsoleColor.Green);
@@ -342,7 +342,7 @@ namespace Languages.UI.CA
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("Please enter a language ID: ");
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    cont = Int32.TryParse(Console.ReadLine(), out idLang)
+                    cont = int.TryParse(Console.ReadLine(), out idLang)
                            && idLang >= 0 && idLang <= _manager.GetAllLanguages().ToList().Count;
                     if (idLang == 0) return;
                     if (!cont)
@@ -354,13 +354,13 @@ namespace Languages.UI.CA
 
                 try
                 {
-                    var ideLanguage= _manager.AddLanguageToIde(idIde, idLang);
+                    var ideLanguage = _manager.AddLanguageToIde(idIde, idLang);
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Successfully added");
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine(ideLanguage.Language + "to");
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine(ideLanguage.Ide );
+                    Console.WriteLine(ideLanguage.Ide);
                     repeat = false;
                 }
                 catch (Exception e)
@@ -369,9 +369,10 @@ namespace Languages.UI.CA
                 }
             }
         }
+
         private void RemoveLanguageFromIde()
         {
-            bool repeat = true;
+            var repeat = true;
             while (repeat)
             {
                 Console.ForegroundColor = ConsoleColor.White;
@@ -381,9 +382,9 @@ namespace Languages.UI.CA
                 int idIde;
                 do
                 {
-                    Console.Write($"[0] ", Console.ForegroundColor = ConsoleColor.Yellow);
-                    Console.WriteLine($"Cancel", Console.ForegroundColor = ConsoleColor.Magenta);
-                    foreach (Ide ide in _manager.GetAllIdes())
+                    Console.Write("[0] ", Console.ForegroundColor = ConsoleColor.Yellow);
+                    Console.WriteLine("Cancel", Console.ForegroundColor = ConsoleColor.Magenta);
+                    foreach (var ide in _manager.GetAllIdes())
                     {
                         Console.Write($"[{ide.Id}] ", Console.ForegroundColor = ConsoleColor.Yellow);
                         Console.WriteLine($"{ide}", Console.ForegroundColor = ConsoleColor.Cyan);
@@ -392,7 +393,7 @@ namespace Languages.UI.CA
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("Please enter an ide ID: ");
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    cont = Int32.TryParse(Console.ReadLine(), out idIde)
+                    cont = int.TryParse(Console.ReadLine(), out idIde)
                            && idIde > 0 && idIde <= _manager.GetAllIdes().ToList().Count;
                     if (idIde == 0)
                         return;
@@ -406,9 +407,9 @@ namespace Languages.UI.CA
                 int idLang;
                 do
                 {
-                    Console.Write($"[0] ", Console.ForegroundColor = ConsoleColor.Yellow);
-                    Console.WriteLine($"Cancel", Console.ForegroundColor = ConsoleColor.Magenta);
-                    foreach (Language l in _manager.GetAllLanguages())
+                    Console.Write("[0] ", Console.ForegroundColor = ConsoleColor.Yellow);
+                    Console.WriteLine("Cancel", Console.ForegroundColor = ConsoleColor.Magenta);
+                    foreach (var l in _manager.GetAllLanguages())
                     {
                         Console.Write($"[{l.Id}] ", Console.ForegroundColor = ConsoleColor.Yellow);
                         Console.WriteLine($"{l}", Console.ForegroundColor = ConsoleColor.Green);
@@ -417,7 +418,7 @@ namespace Languages.UI.CA
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("Please enter a language ID: ");
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    cont = Int32.TryParse(Console.ReadLine(), out idLang)
+                    cont = int.TryParse(Console.ReadLine(), out idLang)
                            && idLang >= 0 && idLang <= _manager.GetAllLanguages().ToList().Count;
                     if (idLang == 0) return;
                     if (!cont)

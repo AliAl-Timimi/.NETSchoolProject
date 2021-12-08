@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Languages.BL;
-using Languages.BL.Domain;
-using Languages.UI.MVC.Models;
+using Languages.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Languages.UI.MVC.Controllers
+namespace Languages.Controllers
 {
     public class IdeController : Controller
     {
@@ -16,7 +12,7 @@ namespace Languages.UI.MVC.Controllers
         {
             _manager = manager;
         }
-        
+
         // GET
         public IActionResult Index()
         {
@@ -33,7 +29,7 @@ namespace Languages.UI.MVC.Controllers
         public IActionResult Add(CreateIdeViewModel ci)
         {
             if (!ModelState.IsValid) return View(ci);
-            Ide ide = _manager.AddIde(ci.Name, ci.Manufacturer, ci.ReleaseDate, ci.SupportedLanguages, ci.Price);
+            var ide = _manager.AddIde(ci.Name, ci.Manufacturer, ci.ReleaseDate, ci.SupportedLanguages, ci.Price);
             return RedirectToAction("Details", new {id = ide.Id});
         }
 

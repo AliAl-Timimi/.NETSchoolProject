@@ -1,17 +1,9 @@
-using System.Collections;
 using System.ComponentModel.DataAnnotations;
 
 namespace Languages.BL.Domain
 {
     public class IdeLanguage
     {
-        [Required]
-        public Ide Ide { get; set; }
-        [Required]
-        public Language Language { get; set; }
-        public int? PopularityOrder { get; set; }
-
-
         public IdeLanguage()
         {
         }
@@ -29,5 +21,11 @@ namespace Languages.BL.Domain
             Language = language;
             PopularityOrder = 0;
         }
+
+        [Required] public Ide Ide { get; set; }
+
+        [Required] public Language Language { get; set; }
+
+        public int? PopularityOrder { get; set; }
     }
 }

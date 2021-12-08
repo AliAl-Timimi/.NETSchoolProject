@@ -45,16 +45,17 @@ namespace Languages.BL
             return _repository.ReadIdeByNameAndReleaseYear(name, releaseDate);
         }
 
-        public Ide AddIde(string name, string manufacturer, DateTime releaseDate, int? supportedLanguages, double? price)
+        public Ide AddIde(string name, string manufacturer, DateTime releaseDate, int? supportedLanguages,
+            double? price)
         {
-            Ide ide = new Ide(name, manufacturer, releaseDate, supportedLanguages, price??0);
+            var ide = new Ide(name, manufacturer, releaseDate, supportedLanguages, price ?? 0);
             Validator.ValidateObject(ide, new ValidationContext(ide), true);
             return _repository.CreateIde(ide);
         }
 
         public Language AddLanguage(string name, LanguageType type, DateTime releaseDate, double version)
         {
-            Language lang = new Language(name, type, releaseDate, version);
+            var lang = new Language(name, type, releaseDate, version);
             Validator.ValidateObject(lang, new ValidationContext(lang), true);
             return _repository.CreateLanguage(lang) ? lang : null;
         }
@@ -71,7 +72,7 @@ namespace Languages.BL
 
         public IdeLanguage AddLanguageToIde(long ideId, long langId)
         {
-            IdeLanguage ideLanguage = new IdeLanguage(GetIde(ideId), GetLanguage(langId));
+            var ideLanguage = new IdeLanguage(GetIde(ideId), GetLanguage(langId));
             _repository.CreateIdeLanguage(ideLanguage);
             return ideLanguage;
         }

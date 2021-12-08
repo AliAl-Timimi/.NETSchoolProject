@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,6 +6,15 @@ namespace Languages.BL.Domain
 {
     public class Ide : IValidatableObject
     {
+        public Ide(string name, string manufacturer, DateTime releaseDate, int? supportedLanguages, double? price)
+        {
+            Name = name;
+            Manufacturer = manufacturer;
+            ReleaseDate = releaseDate;
+            SupportedLanguages = supportedLanguages ?? 0;
+            Price = price;
+        }
+
         [Key] public long Id { get; set; }
 
         [Required]
@@ -29,13 +37,24 @@ namespace Languages.BL.Domain
         [Range(0, 3000, ErrorMessage = "Price should be within range 0-3000")]
         public double? Price { get; set; }
 
-        public Ide(string name, string manufacturer, DateTime releaseDate, int? supportedLanguages, double? price)
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            Name = name;
-            Manufacturer = manufacturer;
-            ReleaseDate = releaseDate;
-            SupportedLanguages = supportedLanguages ?? 0;
-            Price = price;
+            var errors = new List<ValidationResult>();
+            if (ReleaseDate > DateTime.Now)
+            {
+                var errorMessage = "IDE can't be added before release, come back later.";
+                errors.Add(new ValidationResult(errorMessage,
+                    new[] {"ReleaseDate"}));
+            }
+
+            if (ReleaseDate == new DateTime(1, 1, 1))
+            {
+                var errorMessage = "Release date is invalid/in the wrong format";
+                errors.Add(new ValidationResult(errorMessage,
+                    new[] {"ReleaseDate"}));
+            }
+
+            return errors;
         }
 
 
@@ -44,25 +63,6 @@ namespace Languages.BL.Domain
             return
                 $"{Name,-15} created by {Manufacturer,10} (released {ReleaseDate:dd/MM/yyyy}) for {SupportedLanguages,2} language(s) price: {(Price != null ? Price : 0.00),6}";
             // return Name + " created by" + Manufacturer + " (released " + FormattedRelease() + ") for "+ SupportedLanguages  +" languages price: " + Price;
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            List<ValidationResult> errors = new List<ValidationResult>();
-            if (ReleaseDate > DateTime.Now)
-            {
-                string errorMessage = "IDE can't be added before release, come back later.";
-                errors.Add(new ValidationResult(errorMessage,
-                    new[] {"ReleaseDate"}));
-            }
-
-            if (ReleaseDate == new DateTime(1, 1, 1))
-            {
-                string errorMessage = "Release date is invalid/in the wrong format";
-                errors.Add(new ValidationResult(errorMessage,
-                    new[] {"ReleaseDate"}));
-            }
-            return errors;
         }
     }
 }

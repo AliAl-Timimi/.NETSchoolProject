@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,6 +6,24 @@ namespace Languages.BL.Domain
 {
     public class Language
     {
+        public Language(string name, LanguageType type, DateTime releaseDate, double version)
+        {
+            Name = name;
+            Type = type;
+            ReleaseDate = releaseDate;
+            Version = version;
+        }
+
+        public Language(string name, LanguageType type, DateTime releaseDate, double version,
+            ICollection<IdeLanguage> ides)
+        {
+            Name = name;
+            Type = type;
+            ReleaseDate = releaseDate;
+            Version = version;
+            Ides = ides;
+        }
+
         [Key] public long Id { get; set; }
 
         [Required]
@@ -14,7 +31,7 @@ namespace Languages.BL.Domain
         public string Name { get; set; }
 
         [Required]
-        [Range(0, Int32.MaxValue, ErrorMessage = "A valid option must be chosen from the menu.")]
+        [Range(0, int.MaxValue, ErrorMessage = "A valid option must be chosen from the menu.")]
         public LanguageType Type { get; set; }
 
         public DateTime ReleaseDate { get; set; }
@@ -24,23 +41,6 @@ namespace Languages.BL.Domain
 
         public ICollection<IdeLanguage> Ides { get; set; }
         public ICollection<Software> Programs { get; set; }
-
-        public Language(string name, LanguageType type, DateTime releaseDate, double version)
-        {
-            Name = name;
-            Type = type;
-            ReleaseDate = releaseDate;
-            Version = version;
-        }
-        
-        public Language(string name, LanguageType type, DateTime releaseDate, double version, ICollection<IdeLanguage> ides)
-        {
-            Name = name;
-            Type = type;
-            ReleaseDate = releaseDate;
-            Version = version;
-            Ides = ides;
-        }
 
         public override string ToString()
         {
