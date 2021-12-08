@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Languages
+namespace Languages.UI.MVC
 {
     public class Program
     {

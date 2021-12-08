@@ -1,4 +1,4 @@
-namespace Languages.Models
+namespace Languages.UI.MVC.Models
 {
     public class ErrorViewModel
     {

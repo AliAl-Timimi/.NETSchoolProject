@@ -1,7 +1,7 @@
 using Languages.BL;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Languages.Controllers
+namespace Languages.UI.MVC.Controllers
 {
     public class LanguageController : Controller
     {

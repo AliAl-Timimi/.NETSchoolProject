@@ -1,8 +1,8 @@
 using Languages.BL;
-using Languages.Models;
+using Languages.UI.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Languages.Controllers
+namespace Languages.UI.MVC.Controllers
 {
     public class IdeController : Controller
     {
