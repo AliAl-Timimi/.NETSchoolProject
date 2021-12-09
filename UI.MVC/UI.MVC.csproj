@@ -1,17 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <ItemGroup>
-        <ProjectReference Include="..\BL\BL.csproj"/>
-        <ProjectReference Include="..\Domain\Domain.csproj"/>
+        <ProjectReference Include="..\BL\BL.csproj" />
+        <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <_ContentIncludedByDefault Remove="Views\Pages\Ide\Add.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Pages\Ide\Details.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Pages\Ide\Index.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Pages\Ide\Add.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Pages\Ide\Details.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Pages\Ide\Index.cshtml" />
     </ItemGroup>
 
     <PropertyGroup>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
         <AssemblyName>Languages.UI.MVC</AssemblyName>
         <RootNamespace>Languages.UI.MVC</RootNamespace>

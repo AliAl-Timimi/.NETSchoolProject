@@ -1,6 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using Languages.BL;
+using Languages.BL.Domain;
 using Languages.UI.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 namespace Languages.UI.MVC.Controllers
 {
@@ -17,6 +21,25 @@ namespace Languages.UI.MVC.Controllers
         public IActionResult Index()
         {
             return View(_manager.GetAllIdes());
+        }
+
+        [HttpGet]
+        public IActionResult Edit(long id)
+        {
+            var ide = _manager.GetIdeWithLanguages(id);
+            IList<Language> lang = new List<Language>();
+            foreach (var ideLanguage in ide.Languages)
+            {
+                lang.Add(ideLanguage.Language);
+            }
+
+            return View(new CreateIdeViewModel(ide.Name, ide.Manufacturer, ide.ReleaseDate, ide.SupportedLanguages, ide.Price, lang));
+        }
+        
+        [HttpPost]
+        public IActionResult Edit(CreateIdeViewModel ivm)
+        {
+            return null;
         }
 
         [HttpGet]

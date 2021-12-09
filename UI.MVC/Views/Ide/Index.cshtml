@@ -25,6 +25,7 @@
                     Price
                 </th>
                 <th></th>
+                <th></th>
             </tr>
             @foreach (var ide in Model)
             {
@@ -45,7 +46,10 @@
                         }
                     </td>
                     <td>
-                        <a asp-area="" asp-controller="Ide" asp-action="Details" asp-route-id="@ide.Id">Details</a>
+                        <a asp-area="" asp-controller="Ide" asp-action="Details" asp-route-id="@ide.Id" class="text-primary">Details</a>
+                    </td>
+                    <td>
+                        <a asp-area="" asp-controller="Ide" asp-action="Edit" asp-route-id="@ide.Id" class="text-warning">Edit</a>
                     </td>
                 </tr>
             }
