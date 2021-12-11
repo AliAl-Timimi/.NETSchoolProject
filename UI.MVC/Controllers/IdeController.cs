@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using Languages.BL;
 using Languages.BL.Domain;
 using Languages.UI.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 
 namespace Languages.UI.MVC.Controllers
 {
@@ -33,7 +31,10 @@ namespace Languages.UI.MVC.Controllers
                 lang.Add(ideLanguage.Language);
             }
 
-            return View(new CreateIdeViewModel(ide.Name, ide.Manufacturer, ide.ReleaseDate, ide.SupportedLanguages, ide.Price, lang));
+            var ivm = new EditIdeViewModel(ide.Name, ide.Manufacturer, ide.ReleaseDate, ide.SupportedLanguages,
+                ide.Price, lang);
+
+            return View(new EditIdeWithLanguageViewModel(ivm, _manager.GetAllLanguages()));
         }
         
         [HttpPost]

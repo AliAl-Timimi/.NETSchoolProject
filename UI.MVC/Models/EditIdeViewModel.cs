@@ -5,8 +5,19 @@ using Languages.BL.Domain;
 
 namespace Languages.UI.MVC.Models
 {
-    public class CreateIdeViewModel
+    public class EditIdeViewModel
     {
+        public EditIdeViewModel(string name, string manufacturer, DateTime releaseDate, int? supportedLanguages,
+            double? price, IList<Language> languages)
+        {
+            Name = name;
+            Manufacturer = manufacturer;
+            ReleaseDate = releaseDate;
+            SupportedLanguages = supportedLanguages;
+            Price = price;
+            Languages = languages;
+        }
+
         [Required]
         [MinLength(3, ErrorMessage = "Name can not be under 3 characters long.")]
         [MaxLength(15, ErrorMessage = "Name can not be over 15 characters long.")]
