@@ -18,7 +18,7 @@
                 </div>
                 <span asp-validation-for="EditIdeViewModel.Name" class="text-danger ml-3"></span>
             </div>
-            
+
             <div class="form-group row">
                 <label class="col-sm-3" asp-for="EditIdeViewModel.Manufacturer">Manufacturer</label>
                 <div class="col-sm-9">
@@ -26,15 +26,16 @@
                 </div>
                 <span asp-validation-for="EditIdeViewModel.Manufacturer" class="text-danger ml-3"></span>
             </div>
-            
+
             <div class="form-group row">
                 <label class="col-sm-3" asp-for="EditIdeViewModel.ReleaseDate">Release Date</label>
                 <div class="col-sm-9">
-                    <input asp-for="EditIdeViewModel.ReleaseDate" class="form-control" type="text" placeholder='@DateTime.Now.ToString("dd/MM/yyyy")'>
+                    <input asp-for="EditIdeViewModel.ReleaseDate" class="form-control" type="text" placeholder='@DateTime.Now.ToString("dd/MM/yyyy")'
+                           value="@Model.EditIdeViewModel.ReleaseDate.ToString("dd/MM/yyyy")">
                 </div>
                 <span asp-validation-for="EditIdeViewModel.ReleaseDate" class="text-danger ml-3"></span>
             </div>
-            
+
             <div class="form-group row">
                 <label class="col-sm-3" asp-for="EditIdeViewModel.SupportedLanguages">Amount of Supported Languages</label>
                 <div class="col-sm-9">
@@ -42,7 +43,7 @@
                 </div>
                 <span asp-validation-for="EditIdeViewModel.SupportedLanguages" class="text-danger ml-3"></span>
             </div>
-            
+
             <div class="form-group row">
                 <label class="col-sm-3" asp-for="EditIdeViewModel.Price">Price in &euro; </label>
                 <div class="col-sm-9">

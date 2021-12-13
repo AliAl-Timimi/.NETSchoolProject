@@ -42,7 +42,7 @@
                     <th>Version</th>
                     <th></th>
                 </tr>
-                @foreach (var lang in Model.Languages)
+                @foreach (var lang in Model.Languages.OrderBy(o => o.PopularityOrder))
                 {
                     <tr class="border-top border-bottom">
                         <td>@lang.Language.Name</td>

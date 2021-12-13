@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Languages.BL;
@@ -404,22 +405,23 @@ namespace Languages.UI.CA
                     }
                 } while (!cont);
 
-                int idLang;
+                IEnumerable<IdeLanguage> langs = _manager.GetIdeWithLanguages(idIde).Languages;
+                long idLang;
                 do
                 {
                     Console.Write("[0] ", Console.ForegroundColor = ConsoleColor.Yellow);
                     Console.WriteLine("Cancel", Console.ForegroundColor = ConsoleColor.Magenta);
-                    foreach (var l in _manager.GetAllLanguages())
+                    for (int i = 1; i <= langs.Count(); i++)
                     {
-                        Console.Write($"[{l.Id}] ", Console.ForegroundColor = ConsoleColor.Yellow);
-                        Console.WriteLine($"{l}", Console.ForegroundColor = ConsoleColor.Green);
+                        Console.Write($"[{i}] ", Console.ForegroundColor = ConsoleColor.Yellow);
+                        Console.WriteLine($"{langs.ElementAt(i-1).Language}", Console.ForegroundColor = ConsoleColor.Green);
                     }
 
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("Please enter a language ID: ");
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    cont = int.TryParse(Console.ReadLine(), out idLang)
-                           && idLang >= 0 && idLang <= _manager.GetAllLanguages().ToList().Count;
+                    cont = long.TryParse(Console.ReadLine(), out idLang)
+                           && idLang >= 0 && idLang <= langs.Count();
                     if (idLang == 0) return;
                     if (!cont)
                     {
@@ -427,6 +429,8 @@ namespace Languages.UI.CA
                         Console.WriteLine("Please choose a valid language id.");
                     }
                 } while (!cont);
+
+                idLang = langs.ElementAt((int) idLang).Language.Id;
 
                 try
                 {
