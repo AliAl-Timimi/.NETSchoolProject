@@ -132,12 +132,13 @@ namespace Languages.DAL
             var jsPycharm = new IdeLanguage(pycharm, js, 2);
             var csharpRider = new IdeLanguage(rider, csharp, 1);
 
+            /*
             var spotify = new Software("Spotify", "Music streaming", java);
             var netflix = new Software("Netflix", "Video streaming", java);
             var instagram = new Software("Instagram", "Social media", python);
             var osu = new Software("Osu", "Game", csharp);
             var doom = new Software("Doom", "Game", c);
-
+*/
 
             java.Ides = new List<IdeLanguage> {javaVscode, javaIntellij};
             csharp.Ides = new List<IdeLanguage> {csharpVscode, csharpRider};
@@ -150,7 +151,7 @@ namespace Languages.DAL
             intellij.Languages = new List<IdeLanguage> {javaIntellij, jsIntellij};
             pycharm.Languages = new List<IdeLanguage> {pythonPycharm, jsPycharm};
             rider.Languages = new List<IdeLanguage> {csharpRider};
-
+            /*
             List<IdeLanguage> ideLanguages = new()
             {
                 javaVscode, csharpVscode, pythonVscode, cVscode, jsVscode,
@@ -163,10 +164,8 @@ namespace Languages.DAL
             List<Language> languages = new() {java, csharp, python, c, js};
             List<Ide> ides = new() {vscode, clion, intellij, pycharm, rider};
             
-            /*
             List<Language> languages = new() {java, csharp, python, c, js};
             List<Ide> ides = new() {vscode, clion, intellij, pycharm, rider};
-
             IEnumerable<Language> languages = new List<Language> {java, csharp, python, c, js};
             foreach (Language language in languages) CreateLanguage(language);
 

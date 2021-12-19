@@ -20,7 +20,7 @@ namespace Languages.DAL.EF
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder.IsConfigured) return;
-            optionsBuilder.UseSqlite("Data Source=../../../../Languages.db")
+            optionsBuilder.UseSqlite("Data Source=../Languages.db")
                 .LogTo(message => Debug.WriteLine(message), LogLevel.Information);
         }
 
