@@ -1,0 +1,25 @@
+@model dynamic
+
+@{
+    ViewBag.Title = "All software";
+    Layout = "_Layout";
+}
+
+<h2>All Software</h2>
+
+<table class="table table-striped mt-4 order-top border">
+    <thead>
+    <tr class="bg-secondary text-light">
+        <th>Name</th>
+        <th>Description</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody id="softwareTableB"></tbody>
+</table>
+
+<button class="btn btn-success mt-2" id="refresh">Refresh list</button>
+@section Scripts
+{
+    <script src="js/software/index.js" defer></script>
+}

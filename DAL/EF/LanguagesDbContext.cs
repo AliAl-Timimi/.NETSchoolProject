@@ -36,7 +36,7 @@ namespace Languages.DAL.EF
             modelBuilder.Entity<IdeLanguage>().ToTable("tblIdeLanguage").HasKey("IdeFK_shadow", "LanguageFK_shadow");
             modelBuilder.Entity<Ide>().ToTable("tblIdes").HasKey(ide => ide.Id);
             modelBuilder.Entity<Language>().ToTable("tblLanguages").HasKey(lang => lang.Id);
-            modelBuilder.Entity<Software>().ToTable("tblSoftware").HasKey(s => s.id);
+            modelBuilder.Entity<Software>().ToTable("tblSoftware").HasKey(s => s.Id);
         }
     }
 }

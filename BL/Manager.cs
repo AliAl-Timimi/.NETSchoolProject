@@ -91,5 +91,20 @@ namespace Languages.BL
         {
             return _repository.ReadLanguageWithSoftware(id);
         }
+
+        public Software GetSoftware(long id)
+        {
+            return _repository.ReadSoftware(id);
+        }
+
+        public IEnumerable<Software> GetAllSoftware()
+        {
+            return _repository.ReadAllSoftware();
+        }
+
+        public Software AddSoftware(String name, String description)
+        {
+            return _repository.AddSoftware(new Software(name, description, null));
+        }
     }
 }

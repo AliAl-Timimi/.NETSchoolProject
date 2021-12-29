@@ -19,5 +19,9 @@ namespace Languages.DAL
         public void DeleteIdeLanguage(long ideId, long languageId);
         public Ide ReadIdeWithLanguages(long id);
         public Language ReadLanguageWithSoftware(long id);
+        public Software ReadSoftware(long id);
+        public IEnumerable<Software> ReadAllSoftware();
+        public Software AddSoftware(Software software);
+
     }
 }

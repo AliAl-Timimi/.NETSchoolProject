@@ -15,13 +15,13 @@ namespace Languages.BL.Domain
             LanguageUsed = l;
         }
 
-        [Key] public long id { get; set; }
+        [Key] public long Id { get; set; }
 
         [Required] public string Name { get; set; }
 
         public string Description { get; set; }
 
-        [Required] public Language LanguageUsed { get; set; }
+        public Language LanguageUsed { get; set; }
 
         public override string ToString()
         {

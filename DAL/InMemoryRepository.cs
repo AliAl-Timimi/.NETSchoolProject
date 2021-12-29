@@ -172,6 +172,23 @@ namespace Languages.DAL
             IEnumerable<Ide> ides = new List<Ide> {vscode, clion, intellij, pycharm, rider};
             foreach (Ide ide in ides) CreateIde(ide);
             */
+            
+            
+        }
+
+        public Software ReadSoftware(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Software> ReadAllSoftware()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Software AddSoftware(Software software)
+        {
+            throw new NotImplementedException();
         }
     }
 }

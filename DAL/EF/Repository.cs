@@ -121,5 +121,31 @@ namespace Languages.DAL.EF
                 .ThenInclude(c => c.Language)
                 .FirstOrDefault(ide => ide.Id == id);
         }
+
+        public Software ReadSoftware(long id)
+        {
+            return _context.Softwares
+                .Include(s => s.LanguageUsed)
+                .ThenInclude(l => l.Ides)
+                .ThenInclude(c => c.Ide)
+                .FirstOrDefault(s => s.Id == id);
+        }
+
+        public IEnumerable<Software> ReadAllSoftware()
+        {
+            return _context.Softwares
+                .AsEnumerable();
+        }
+
+        public Software AddSoftware(Software software)
+        {
+            _context.Softwares.Add(software);
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+            IQueryable<Software> softwareQueryable = _context.Softwares;
+            softwareQueryable = softwareQueryable.Where(s => s.Name.ToLower() == software.Name.ToLower());
+            softwareQueryable = softwareQueryable.Where(s => s.Description.ToLower() == software.Description.ToLower());
+            return softwareQueryable.First();
+        }
     }
 }

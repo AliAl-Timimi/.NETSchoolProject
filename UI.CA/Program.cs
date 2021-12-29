@@ -178,7 +178,7 @@ namespace Languages.UI.CA
                 {
                     cont = int.TryParse(yearinput, out year) && year <= DateTime.Now.Year;
                     Console.ForegroundColor = ConsoleColor.Red;
-                    if (!cont) Console.WriteLine(year + "\nOngeldige invoer!");
+                    if (!cont) Console.WriteLine("\nOngeldige invoer!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
@@ -430,7 +430,7 @@ namespace Languages.UI.CA
                     }
                 } while (!cont);
 
-                idLang = langs.ElementAt((int) idLang).Language.Id;
+                idLang = langs.ElementAt((int) idLang-1).Language.Id;
 
                 try
                 {

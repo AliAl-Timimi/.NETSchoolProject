@@ -23,5 +23,8 @@ namespace Languages.BL
         public void RemoveLanguageFromIde(long ideId, long langId);
         public Ide GetIdeWithLanguages(long id);
         public Language GetLanguageWithSoftware(long id);
+        public Software GetSoftware(long id);
+        public IEnumerable<Software> GetAllSoftware();
+        public Software AddSoftware(String name, String description);
     }
 }

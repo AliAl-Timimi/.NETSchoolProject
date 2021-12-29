@@ -1,0 +1,7 @@
+###
+POST https://localhost:5001/api/Softwares
+Content-Type: application/json
+
+{"name": "test","description": "test#2"}
+
+###
