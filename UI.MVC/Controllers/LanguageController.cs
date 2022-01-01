@@ -12,9 +12,9 @@ namespace Languages.UI.MVC.Controllers
             _manager = manager;
         }
 
-        public IActionResult Details(long id)
+        public IActionResult Details(long langId)
         {
-            return View(_manager.GetLanguageWithSoftware(id));
+            return View(_manager.GetLanguageWithSoftware(langId));
         }
     }
 }

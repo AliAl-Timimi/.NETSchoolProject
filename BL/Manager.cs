@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Languages.BL.Domain;
 using Languages.DAL;
+using Languages.DAL.EF;
 
 namespace Languages.BL
 {
@@ -76,6 +77,12 @@ namespace Languages.BL
             _repository.CreateIdeLanguage(ideLanguage);
             return ideLanguage;
         }
+        public IdeLanguage AddLanguageToIde(long ideId, long langId, int? popOrder)
+        {
+            var ideLanguage = new IdeLanguage(GetIde(ideId), GetLanguage(langId), popOrder);
+            _repository.CreateIdeLanguage(ideLanguage);
+            return ideLanguage;
+        }
 
         public void RemoveLanguageFromIde(long ideId, long langId)
         {
@@ -105,6 +112,21 @@ namespace Languages.BL
         public Software AddSoftware(String name, String description)
         {
             return _repository.AddSoftware(new Software(name, description, null));
+        }
+
+        public void ChangeSoftware(Software software)
+        {
+            _repository.UpdateSoftware(software);
+        }
+
+        public Language GetLanguageWithIdes(long id)
+        {
+            return _repository.ReadLanguageWithIdes(id);
+        }
+
+        public IEnumerable<Ide> GetNonLinkedIdes(long id)
+        {
+            return _repository.ReadNonLinkedIdes(id);
         }
     }
 }

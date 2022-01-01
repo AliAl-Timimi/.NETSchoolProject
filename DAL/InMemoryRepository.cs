@@ -185,8 +185,21 @@ namespace Languages.DAL
         {
             throw new NotImplementedException();
         }
-
         public Software AddSoftware(Software software)
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdateSoftware(Software software)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Language ReadLanguageWithIdes(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Ide> ReadNonLinkedIdes(long id)
         {
             throw new NotImplementedException();
         }

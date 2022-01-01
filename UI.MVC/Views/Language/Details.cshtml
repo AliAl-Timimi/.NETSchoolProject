@@ -22,6 +22,7 @@
             <dt class="col-3">Version</dt>
             <dd class="col-9">@Model.Version</dd>
         </dl>
+        
         @if (Model.Programs.Count != 0)
         {
             <h3>Programs</h3>
@@ -39,5 +40,13 @@
                 }
             </table>
         }
+        <div id="idesDiv"></div>
+        <div id="addIdeDiv"></div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script src="/js/language/details.js" defer>
+    </script>
+}

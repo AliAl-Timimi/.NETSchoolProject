@@ -20,7 +20,7 @@ namespace Languages.BL.Domain
             Ide = ide;
             Language = language;
             PopularityOrder = 0;
-        }
+        } 
 
         [Required] public Ide Ide { get; set; }
 

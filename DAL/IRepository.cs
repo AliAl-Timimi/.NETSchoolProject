@@ -22,6 +22,8 @@ namespace Languages.DAL
         public Software ReadSoftware(long id);
         public IEnumerable<Software> ReadAllSoftware();
         public Software AddSoftware(Software software);
-
+        public void UpdateSoftware(Software software);
+        public Language ReadLanguageWithIdes(long id);
+        public IEnumerable<Ide> ReadNonLinkedIdes(long id);
     }
 }

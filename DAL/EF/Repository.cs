@@ -62,7 +62,7 @@ namespace Languages.DAL.EF
             idesQueryable = idesQueryable.Where(i => i.ReleaseDate == ide.ReleaseDate);
             idesQueryable = idesQueryable.Where(i => (int) i.Price == (int) ide.Price);
             idesQueryable = idesQueryable.Where(i => i.SupportedLanguages == ide.SupportedLanguages);
-            return idesQueryable.First();
+            return idesQueryable.FirstOrDefault();
         }
 
         public bool CreateLanguage(Language language)
@@ -119,22 +119,17 @@ namespace Languages.DAL.EF
                 .Include(s => s.Programs)
                 .Include(i => i.Ides)
                 .ThenInclude(c => c.Language)
-                .FirstOrDefault(ide => ide.Id == id);
+                .FirstOrDefault(lang => lang.Id == id);
         }
 
         public Software ReadSoftware(long id)
         {
-            return _context.Softwares
-                .Include(s => s.LanguageUsed)
-                .ThenInclude(l => l.Ides)
-                .ThenInclude(c => c.Ide)
-                .FirstOrDefault(s => s.Id == id);
+            return _context.Softwares.Find(id);
         }
-
+ 
         public IEnumerable<Software> ReadAllSoftware()
         {
-            return _context.Softwares
-                .AsEnumerable();
+            return _context.Softwares.AsEnumerable();
         }
 
         public Software AddSoftware(Software software)
@@ -146,6 +141,35 @@ namespace Languages.DAL.EF
             softwareQueryable = softwareQueryable.Where(s => s.Name.ToLower() == software.Name.ToLower());
             softwareQueryable = softwareQueryable.Where(s => s.Description.ToLower() == software.Description.ToLower());
             return softwareQueryable.First();
+        }
+
+        public void UpdateSoftware(Software software)
+        {
+            /*
+            var s = ReadSoftware(software.Id);
+            if (s != null)
+            {
+                s.Name = software.Name;
+                s.Description = s.Description;
+            }
+
+            _context.SaveChanges();
+            */
+            _context.Softwares.Update(software);
+            _context.SaveChanges();
+        }
+
+        public Language ReadLanguageWithIdes(long id)
+        {
+            return _context.Languages
+                .Include(i => i.Ides)
+                .ThenInclude(c => c.Ide)
+                .FirstOrDefault(lang => lang.Id == id);
+        }
+
+        public IEnumerable<Ide> ReadNonLinkedIdes(long id)
+        {
+            return _context.Ides.Where(ide => ide.Languages.All(il => il.Language.Id != id)).AsEnumerable();
         }
     }
 }

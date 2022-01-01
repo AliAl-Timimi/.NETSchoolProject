@@ -20,11 +20,14 @@ function showSoftwareInTable(software) {
 
 function showSoftware(software) {
     const tableBody = document.getElementById("softwareTableB")
-        tableBody.innerHTML += `
+    let desc = "N/A";
+    if (software.description !== "")
+        desc = software.description;
+    tableBody.innerHTML += `
         <tr>
             <td>${software.name}</td>
-            <td>${software.description}</td>
-            <td><a href="/Software/Details?id=${software.id}">Details</a></td>
+            <td>${desc}</td>
+            <td><a class="text-primary" href="/Software/Details?id=${software.id}">Details</a></td>
         </tr>`;
 }
 

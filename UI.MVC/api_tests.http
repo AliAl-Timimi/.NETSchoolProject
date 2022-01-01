@@ -1,7 +1,53 @@
 ###
+
 POST https://localhost:5001/api/Softwares
 Content-Type: application/json
 
-{"name": "test","description": "test#2"}
+{
+  "name": "test",
+  "description": "test#2"
+}
 
 ###
+
+PUT https://localhost:5001/api/Softwares/3
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "testcall1",
+  "description": "testdescput1"
+}
+
+###
+
+PUT https://localhost:5001/api/Softwares/3
+Content-Type: application/json
+
+{
+  "id": 4,
+  "name": "testcall1",
+  "description": "testdescput1"
+}
+
+###
+
+PUT https://localhost:5001/api/Softwares/3
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "es",
+  "description": "testdescput1"
+}
+
+###
+
+POST https://localhost:5001/api/IdeLanguages
+Content-Type: application/json
+
+{
+"ideId": 3,
+"langId": 3,
+"popOrder": 3
+}

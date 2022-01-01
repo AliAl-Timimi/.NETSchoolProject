@@ -4,5 +4,35 @@
     ViewBag.Title = "Software";
     Layout = "_Layout";
 }
+<div class="card">
+    <div class="card-body">
+        <h2>Software Details</h2>
 
-<h2>Software</h2>
+        <form>
+            <div class="form-group row">
+                <label for="name" class="col-sm-3">Name</label>
+                <div class="col-sm-9">
+                    <input id="name" autocomplete="off" class="form-control" placeholder="Doom">
+                </div>
+                <span class="text-danger ml-5 md-4" id="nameVal"></span>
+            </div>
+            <div class="form-group row">
+                <label for="desc" class="col-sm-3">Description</label>
+                <div class="col-sm-9">
+                    <input id="desc" autocomplete="off" class="form-control" placeholder="Game">
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-primary ml-2 md-2 mt-2" id="saveButton">Save</button>
+                <span class="text-success ml-2 mt-3" id="softwareSuccess"></span>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="/js/software/details.js" defer>
+    </script>
+}

@@ -26,5 +26,9 @@ namespace Languages.BL
         public Software GetSoftware(long id);
         public IEnumerable<Software> GetAllSoftware();
         public Software AddSoftware(String name, String description);
+        public void ChangeSoftware(Software software);
+        public Language GetLanguageWithIdes(long id);
+        public IEnumerable<Ide> GetNonLinkedIdes(long id);
+        public IdeLanguage AddLanguageToIde(long ideId, long langId, int? popOrder);
     }
 }

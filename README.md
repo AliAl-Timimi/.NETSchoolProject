@@ -58,3 +58,39 @@ Location: https://localhost:5001/api/Softwares/6
 "languageUsed": null
 }
 
+### Aanpassen van een software (success)
+
+#### Request
+PUT https://localhost:5001/api/Softwares/3
+Content-Type: application/json
+
+{
+"id": 4,
+"name": "testcall1",
+"description": "testdescput1"
+}
+
+### Aanpassen van een software (success)
+
+#### Request
+
+PUT https://localhost:5001/api/Softwares/3
+Content-Type: application/json
+
+{
+"id": 3,
+"name": "es",
+"description": "testdescput1"
+}
+
+#### Request
+
+PUT https://localhost:5001/api/Softwares/3
+Content-Type: application/json
+
+{
+"id": 4,
+"name": "testcall1",
+"description": "testdescput1"
+}
+
