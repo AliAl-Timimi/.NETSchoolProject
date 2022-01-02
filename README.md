@@ -70,10 +70,16 @@ Content-Type: application/json
 "description": "testdescput1"
 }
 
+#### Response
+HTTP/1.1 204 No Content
+Date: Sun, 02 Jan 2022 21:06:28 GMT
+Server: Kestrel
+
+
+
 ### Aanpassen van een software (fail)
 
 #### Request
-
 PUT https://localhost:5001/api/Softwares/3
 Content-Type: application/json
 
@@ -82,9 +88,18 @@ Content-Type: application/json
 "name": "es",
 "description": "testdescput1"
 }
+#### Response
+HTTP/1.1 400 Bad Request
+Date: Sun, 02 Jan 2022 21:08:45 GMT
+Content-Type: text/plain; charset=utf-8
+Server: Kestrel
+Transfer-Encoding: chunked
+
+Name should be at least 3 characters long
+
+Response code: 400 (Bad Request); Time: 5ms; Content length: 41 bytes
 
 #### Request
-
 PUT https://localhost:5001/api/Softwares/3
 Content-Type: application/json
 
@@ -93,4 +108,15 @@ Content-Type: application/json
 "name": "testcall1",
 "description": "testdescput1"
 }
+
+#### Response
+HTTP/1.1 400 Bad Request
+Date: Sun, 02 Jan 2022 21:07:16 GMT
+Content-Type: text/plain; charset=utf-8
+Server: Kestrel
+Transfer-Encoding: chunked
+
+Ids should match
+
+Response code: 400 (Bad Request); Time: 28ms; Content length: 16 bytes
 
