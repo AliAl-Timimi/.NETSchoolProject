@@ -43,7 +43,7 @@ function saveChanges() {
                 suc.innerHTML = ""
                 val.innerHTML = "Name should be at least 3 characters long"
             } else if (response.status === 204) {
-                suc.innerHTML = "Software added successfully!"
+                suc.innerHTML = "Software saved successfully!"
                 val.innerHTML = ""
             }
         })

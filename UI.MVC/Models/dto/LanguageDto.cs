@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Languages.BL.Domain;
 
 namespace Languages.UI.MVC.Models.dto
@@ -21,7 +22,7 @@ namespace Languages.UI.MVC.Models.dto
             ReleaseDate = lang.ReleaseDate.ToString("dd/MM/yyyy");
             Version = lang.Version;
             Ides = new List<IdeWithoutLangDto>();
-            foreach (var i in lang.Ides)
+            foreach (var i in lang.Ides.OrderBy(o => o.PopularityOrder))
             {
                 Ides.Add(new IdeWithoutLangDto(i.Ide));
             }

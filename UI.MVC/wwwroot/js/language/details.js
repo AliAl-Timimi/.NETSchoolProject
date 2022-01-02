@@ -92,34 +92,33 @@ function createSelection(ides) {
         <button type="button" class="btn btn-primary mt-2" id="addButton">Add Ide to Language</button>
         `
     document.getElementById("addButton").addEventListener("click", buttonClick)
-    
-    if(ides.length !== 0) {
+
+    if (ides.length !== 0) {
         ides.forEach(ide => addSelectOption(ide))
-    }
-    else {
+    } else {
         const select = document.getElementById("ideSelect")
-        select.innerHTML+=
+        select.innerHTML +=
             `<option value="-1">No ide left to add to Language.</option>`
-        document.getElementById("addButton").setAttribute("disabled", "disabled")
+        document.getElementById("addButton").disabled = true
+        document.getElementById("ideSelect").disabled = true
     }
 }
 
 function addSelectOption(ide) {
     const select = document.getElementById("ideSelect")
-    select.innerHTML+=
+    select.innerHTML +=
         `<option value="${ide.id}">${ide.name}</option>`
 }
 
 function addIdeLanguage() {
     let order = document.getElementById("popOrder").value
-    if(order === "")
+    if (order === "")
         order = 0;
     fetch(`/api/IdeLanguages`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
-
         },
         body: JSON.stringify({
             "IdeId": document.getElementById("ideSelect").value,
