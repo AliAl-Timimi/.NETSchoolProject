@@ -70,7 +70,7 @@ Content-Type: application/json
 "description": "testdescput1"
 }
 
-### Aanpassen van een software (success)
+### Aanpassen van een software (fail)
 
 #### Request
 
