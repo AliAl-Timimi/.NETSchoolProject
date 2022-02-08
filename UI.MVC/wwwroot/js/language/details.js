@@ -133,7 +133,7 @@ function addIdeLanguage() {
 
 async function buttonClick() {
     addIdeLanguage();
-    await sleep(100)
+    await sleep(500)
     init();
 }
 

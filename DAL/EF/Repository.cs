@@ -56,7 +56,6 @@ namespace Languages.DAL.EF
         {
             _context.Ides.Add(ide);
             _context.SaveChanges();
-            _context.ChangeTracker.Clear();
             IQueryable<Ide> idesQueryable = _context.Ides;
             idesQueryable = idesQueryable.Where(i => i.Name.ToLower() == ide.Name.ToLower());
             idesQueryable = idesQueryable.Where(i => i.ReleaseDate == ide.ReleaseDate);
@@ -69,8 +68,6 @@ namespace Languages.DAL.EF
         {
             _context.Languages.Add(language);
             _context.SaveChanges();
-            _context.ChangeTracker.Clear();
-
             return true;
         }
 
@@ -93,7 +90,6 @@ namespace Languages.DAL.EF
                 throw new ArgumentException("Language is already linked to Ide.");
             _context.IdeLanguages.Add(ideLanguage);
             _context.SaveChanges();
-            _context.ChangeTracker.Clear();
         }
 
         public void DeleteIdeLanguage(long ideId, long languageId)
@@ -102,7 +98,6 @@ namespace Languages.DAL.EF
                 throw new ArgumentException("Language is not part of this ide.");
             _context.IdeLanguages.Remove(_context.IdeLanguages.Find(ideId, languageId));
             _context.SaveChanges();
-            _context.ChangeTracker.Clear();
         }
 
         public Ide ReadIdeWithLanguages(long id)
@@ -136,7 +131,6 @@ namespace Languages.DAL.EF
         {
             _context.Softwares.Add(software);
             _context.SaveChanges();
-            _context.ChangeTracker.Clear();
             IQueryable<Software> softwareQueryable = _context.Softwares;
             softwareQueryable = softwareQueryable.Where(s => s.Name.ToLower() == software.Name.ToLower());
             softwareQueryable = softwareQueryable.Where(s => s.Description.ToLower() == software.Description.ToLower());
